@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Datos clientes {% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Clientes</h1>
+    </div>
+    <!-- <div class="row">     -->
+        <div class="container">
+            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <table id="Clientes" class="table table-hover table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="centered">Nombre</th>
+                            <th class="centered">Empresa</th>
+                            <th class="centered">CUIT</th>
+                            <th class="centered">Teléfono</th>
+                            <th class="centered">E-mail</th>
+                            <th class="centered">Dirección</th>
+                            <th class="centered">Provincia</th>
+                            <th class="centered">Editar información</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody_Clientes">
+                        {% for c in Clies %}
+                            <tr>
+                                <td>{{c.nombre}}</td>
+                                <td>{{c.razon_social}}</td>
+                                <td>{{c.cuit}}</td>
+                                <td><a href="https://wa.me/{{c.telefono}}" target="_blank" rel="noopener noreferrer">{{c.telefono}}</a></td>
+                                <td>{{c.email}}</td>
+                                <td><a href="https://www.google.com/maps/search/?api=1&query={{c.direccion_google}}" target="_blank" rel="noopener noreferrer">{{c.direccion}}</a></td>
+                                <td>{{c.provincia}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarClienteModal" data-bs-whatever="{{c.nombre}}|{{c.razon_social}}|{{c.cuit}}|{{c.telefono}}|{{c.email}}|{{c.direccion}}|{{c.provincia}}"><i class="fa-solid fa-pencil sm"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+
+                    </tbody>
+
+                </table>
+            </div>
+            <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        </div>
+        
+    <!-- </div> -->
+
+     <!-- Modal Editar Cliente -->
+     <div class="modal fade" id="editarClienteModal" tabindex="-1" aria-labelledby="editarClienteModalLabel" data-bs-backdrop="static" aria-hidden="true">   
+        <form action="editarCliente" method="POST">
+            {% csrf_token %}
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editarClienteModal">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input id="id" name="id" hidden>
+
+                        <label for="nombre" style="font-weight: bold">Nombre:</label>
+                        <input id="nombre" name="nombre" required>
+
+                        <label for="razon_social" style="font-weight: bold">Razón social:</label>
+                        <input type="text" id="razon_social" name="razon_social">
+
+                        <div class="form-group">
+                            <label for="cuit">CUIT:</label>
+                            <input type="text" id = "cuit" name="cuit" placeholder="CUIT sin guiones">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="text" id = "email" name="email" placeholder="cliente@suempresa.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="text" id = "telefono" name="telefono" placeholder="3876-123456">
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" id = "direccion" name="direccion" placeholder="Calle sin nombre 123">
+                        </div>
+                        <div class="form-group">
+                            <label for="provincia">Provincia:</label>
+                            <select name="provincia" id="provincia">
+                                <option value="Otra región">Otra región</option>
+                                <option value="Buenos Aires">Buenos Aires</option>
+                                <option value="Catamarca">Catamarca</option>
+                                <option value="Chaco">Chaco</option>
+                                <option value="Chubut">Chubut</option>
+                                <option value="Córdoba">Córdoba</option>
+                                <option value="Corrientes">Corrientes</option>
+                                <option value="Entre Ríos">Entre Ríos</option>
+                                <option value="Formosa">Formosa</option>
+                                <option value="Jujuy">Jujuy</option>
+                                <option value="La Pampa">La Pampa</option>
+                                <option value="La Rioja">La Rioja</option>
+                                <option value="Mendoza">Mendoza</option>
+                                <option value="Misiones">Misiones</option>
+                                <option value="Neuquén">Neuquén</option>
+                                <option value="Río Negro">Río Negro</option>
+                                <option value="Salta">Salta</option>
+                                <option value="San Juan">San Juan</option>
+                                <option value="San Luis">San Luis</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="Santa Fe">Santa Fe</option>
+                                <option value="Santiago del Estero">Santiago del Estero</option>
+                                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                <option value="Tucumán">Tucumán</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</a></button> 
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Custom Js -->
+    <script src="{% static 'clientes/js/Clientes.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

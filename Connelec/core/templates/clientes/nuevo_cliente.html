@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Nuevo cliente {% endblock %}</title>
+</head>
+<body>
+    <header>
+    {% block header %}
+
+    {% endblock %}
+    </header>
+    {% block content %}
+    <div class="container">
+        <h1>Alta nuevo cliente</h1>
+    </div>
+    <div class="botonera">
+        <div>
+            <form action="nuevoCliente" method="post" class="formulario">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id = "nombre" name="nombre" placeholder="Nombre del cliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="razon_social">Razón social:</label>
+                    <input type="text" id = "razon_social" name="razon_social" placeholder="Razón social del cliente">
+                </div>
+                <div class="form-group">
+                    <label for="cuit">CUIT:</label>
+                    <input type="text" id = "cuit" name="cuit" placeholder="CUIT sin guiones">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="text" id = "email" name="email" placeholder="cliente@suempresa.com">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id = "telefono" name="telefono" placeholder="3876-123456">
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id = "direccion" name="direccion" placeholder="Calle sin nombre 123">
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia:</label>
+                    <select name="provincia" id="provincia">
+                        <option value="Sin asignar">Sin asignar</option>
+                        <option value="Buenos Aires">Buenos Aires</option>
+                        <option value="Catamarca">Catamarca</option>
+                        <option value="Chaco">Chaco</option>
+                        <option value="Chubut">Chubut</option>
+                        <option value="Córdoba">Córdoba</option>
+                        <option value="Corrientes">Corrientes</option>
+                        <option value="Entre Ríos">Entre Ríos</option>
+                        <option value="Formosa">Formosa</option>
+                        <option value="Jujuy">Jujuy</option>
+                        <option value="La Pampa">La Pampa</option>
+                        <option value="La Rioja">La Rioja</option>
+                        <option value="Mendoza">Mendoza</option>
+                        <option value="Misiones">Misiones</option>
+                        <option value="Neuquén">Neuquén</option>
+                        <option value="Río Negro">Río Negro</option>
+                        <option value="Salta">Salta</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="San Luis">San Luis</option>
+                        <option value="Santa Cruz">Santa Cruz</option>
+                        <option value="Santa Fe">Santa Fe</option>
+                        <option value="Santiago del Estero">Santiago del Estero</option>
+                        <option value="Tierra del Fuego">Tierra del Fuego</option>
+                        <option value="Tucumán">Tucumán</option>
+                    </select>
+                </div>
+                <button type="submit" id="submit" class="btn btn-outline-dark">Crear clietne</button>
+            </form>
+        </div>
+        <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+    </div>
+    {% endblock %}
+</body>
+</html>

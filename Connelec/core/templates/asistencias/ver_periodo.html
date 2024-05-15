@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Marcar Asistencia {% endblock %}</title>
+</head>
+<body>
+    <header>
+    {% block header %}
+    {% endblock %}
+    </header>
+    {% block content %}
+    <div class="botonera">
+        <form class="formulario" action="verPeriodo" method="post">
+            {% csrf_token %}
+
+            <div class="form-group usuario">
+                <label for="usuario" style="font-weight: bold">Nombre de usuario</label>
+                <br>
+                <select name="usuario" id="usuairo" class="form-control select">
+                    <option value="{{username}}">{{username}}</option>
+                    {% for u in Usus %}
+                        <option value="{{u.nombre}}">{{u.nombre}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group fecha">
+                <label for="fecha1" style="font-weight: bold">Desde fecha</label>
+                <br>
+                <input type="date" id="fecha1" name="fecha1" format="%Y-%m-%d" value="{{fecha1}}" required>
+            </div>
+
+            <div class="form-group fecha">
+                <label for="fecha2" style="font-weight: bold">Hasta fecha</label>
+                <br>
+                <input type="date" id="fecha2" name="fecha2" format="%Y-%m-%d" value="{{fecha1}}" required>
+            </div>
+
+            <br>   
+
+
+            <!-- {{ form.as_p }} -->
+            <button type="submit" id="submit" class="btn btn-outline-dark">Calcular horas</button>
+            <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        </form>
+        
+    </div>
+{% endblock %}
+</body>
+</html>

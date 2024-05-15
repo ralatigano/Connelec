@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Registro asistencias {% endblock %}</title>
+    {% block navbar %}
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Lista de asistencias</h1>
+        <div>
+            <table id="tabla_registros" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="centered">Número</th>
+                        <th class="centered">Nombre</th>
+                        <th class="centered">Tipo</th>
+                        <th class="centered">Fecha y hora</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla_registros">
+                    {% for r in registros %}
+                    
+                        <tr>
+                            <td>{{r.id}}</td>
+                            <td>{{r.nombre_completo}}</td>
+                            <td>{{r.tipo}}</td>
+                            <td>{{r.fecha}} {{r.hora}}</td>
+                        </tr>
+                    
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+    </div>
+        <!-- Custom Js -->
+    <script src="{% static 'asistencias/js/registros.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

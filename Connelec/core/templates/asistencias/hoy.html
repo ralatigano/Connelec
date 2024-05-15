@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Hoy {% endblock %}</title>
+</head>
+<body>
+    <header>
+    {% block header %}
+        {% if messages%}
+            {% for message in messages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+    </header>
+    {% block content %}
+        <div class="container">
+            <h1>Hola {{usuario}}</h1>
+            <h2>{{mensaje}}</h2>
+            <div>
+                <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+                <a href="/asistencias/marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

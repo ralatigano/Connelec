@@ -1,0 +1,67 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Nuevo proyecto {% endblock %}</title>
+</head>
+<body>
+    <header>
+    {% block header %}
+
+    {% endblock %}
+    </header>
+    {% block content %}
+    <div class="container">
+        <h1>Crear nuevo proyecto</h1>
+    </div>
+    
+    <div class="botonera">
+        <div>
+            <form action="" method="post" class="formulario">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="nombre">Título:</label>
+                    <input type="text" id = "nombre" name="nombre" placeholder="Título del proyecto" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea rows="4" cols="50" id = "descripcion" name="descripcion" placeholder="Si lo considera necesario, agregue una descripción del proyecto."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="cliente">Cliente:</label>
+                    <select name="cliente" id="cliente">
+                        <option value="None">Ninguno</option>
+                        {% for c in Clies %}
+                            <option value="{{c.nombre}}">{{c.nombre}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <select name="estado" id="estado">
+                        <option value="0">Sin asignar</option>
+                        <option value="1">Asignado/Sin iniciar</option>
+                        <option value="2">En proceso</option>
+                        <option value="3">Hecho</option>
+                        <option value="4">En pausa</option>
+                        <option value="5">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fecha_entrega">Fecha de entrega:</label>
+                    <input type="date" id="fecha_entrega" name="fecha_entrega" format="%Y-%m-%d">
+                </div> -->
+                <!-- <div class="form-group">
+                    <label for="archivos">Archivo/s:</label>
+                    <input type="file" name="archivos" id="archivos" multiple placeholder="Suba uno o varios archivos si corresponde" upload_to="archivos">
+                </div> -->
+                <button type="submit" id="submit" class="btn btn-outline-dark">Crear proyecto</button>
+            </form>
+        </div>
+        <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+    </div>
+    {% endblock %}
+</body>
+</html>

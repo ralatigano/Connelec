@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Menu reportes {% endblock %}</title>
+</head>
+<body>
+    <header>
+    {% block header %}
+    <div class="saludo">
+        <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
+    </div>
+    {% endblock %}
+    </header>
+    {% block content %}
+    <div class="botonera">
+        <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+        <a href="verReportes"><button type="button" class="btn btn-outline-dark">Ver reportes</button></a>
+        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+    </div>
+    {% endblock %}
+</body>
+</html>
