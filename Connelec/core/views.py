@@ -31,31 +31,58 @@ def registrarse(request):
 def inicio(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
-        img = User.objects.get(username=request.user).image.url
-        data = {
-            'usuario': usuario,
-            'img': img
-        }
+        try:
+            img = User.objects.get(username=request.user).image.url
+            data = {
+                'usuario': usuario,
+                'img': img
+            }
+        except:
+            data = {'usuario': usuario}
     return render(request, 'core/inicio.html', data)
 
 
 def iniciar_sesion(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('inicio')
-            else:
-                messages.error(request, 'Usuario o contraseña incorrectos.')
+        # print(request.POST)
+        # form = AuthenticationForm(None, request.POST)
+        # if form.is_valid():
+        username = request.POST['username']
+        password = request.POST['password']
+        # form.clean()
+        # user = form.get_user()
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('inicio')
         else:
-            messages.error(request, 'Ingresa datos válidos.')
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+        # else:
+            # messages.error(request, 'Ingresa datos válidos.')
     # return render(request, 'core/login.html')
     form = AuthenticationForm()
     return render(request, 'core/login.html', {'form': form})
+
+# def iniciar_sesion(request):
+#     if request.method == 'POST':
+#         # print(request.POST)
+#         form = AuthenticationForm(None, request.POST)
+#         if form.is_valid():
+#             # username = request.POST['username']
+#             # password = request.POST['password']
+#             form.clean()
+#             user = form.get_user()
+#         # user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('inicio')
+#             else:
+#                 messages.error(request, 'Usuario o contraseña incorrectos.')
+#         else:
+#             messages.error(request, 'Ingresa datos válidos.')
+#     # return render(request, 'core/login.html')
+#     form = AuthenticationForm()
+#     return render(request, 'core/login.html', {'form': form})
 
 
 def editar_perfil(request):
@@ -84,7 +111,10 @@ def editar_perfil(request):
         last_name = User.objects.get(username=username).last_name
         birthday = datetime.strftime(User.objects.get(
             username=username).birthday, '%Y-%m-%d')
-        img = User.objects.get(username=request.user).image.url
+        try:
+            img = User.objects.get(username=request.user).image.url
+        except:
+            img = ''
         data = {
             'usuario': usuario,
             'first_name': first_name,
