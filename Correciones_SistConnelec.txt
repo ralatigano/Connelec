@@ -1,0 +1,14 @@
+**Correcciones
+
+1) Verificar porque no está cargando la datatable y sus herramientas en la vista de "Ver proyectos". (Hecho, falta sincronizar repositorios)
+2) Comprobar porque no se puede borrar clientes de la base de datos.
+3) Comprobar porque no se puede borrar proyectos de la base de datos.
+4) Comprobar porque no se puede ver la tabla de base de datos de las entradas desde el admin panel.
+5) En la vista de "ver proyectos", permitir que el botón de editar el número de expediente me deje borrar el contenido que ya existe. Revisar también el límite de caracteres.
+
+**Mejoras
+
+1) En la vista de "Ver proyectos" sería útil tener un botón de "Crear nuevo proyecto".
+2) Ver la posibilidad de que haya comunicación entre adafruit y el sistema para llevar las asistencias.
+3) Que las asignaciones de tarea disparen correos electrónicos. Eventualmente podrían ser mensajes o notificaciones push ¿?
+4) En los casos en donde sea conveniente, evaluar la posibilidad de exportar tablas o info a excel u otro formato de utilidad. Por ejemplo, en el armado de los reportes semanales.
