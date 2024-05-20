@@ -1,14 +1,20 @@
 **Correcciones
 
-1) Verificar porque no está cargando la datatable y sus herramientas en la vista de "Ver proyectos". (Hecho, falta sincronizar repositorios)
-2) Comprobar porque no se puede borrar clientes de la base de datos.
-3) Comprobar porque no se puede borrar proyectos de la base de datos.
-4) Comprobar porque no se puede ver la tabla de base de datos de las entradas desde el admin panel.
-5) En la vista de "ver proyectos", permitir que el botón de editar el número de expediente me deje borrar el contenido que ya existe. Revisar también el límite de caracteres.
+1) Verificar porque no está cargando la datatable y sus herramientas en la vista de "Ver proyectos". (Hecho)
+2) Comprobar porque no se puede borrar clientes de la base de datos. (hecho?)
+3) Comprobar porque no se puede borrar proyectos de la base de datos. (hecho?)
+4) Comprobar porque no se puede ver la tabla de base de datos de las entradas desde el admin panel. (hecho?)
+5) En la vista de "ver proyectos", permitir que el botón de editar el número de expediente me deje borrar el contenido que ya existe. Cambiar el límite de caracteres a 200. (Hecho)
+6) Investigar porque el formulario de inicio de sesión no funciona cuando pierde el foco.
+7) Corregir la tabla de "registros" para que muestre la fecha ingresada en el formulario y no la fecha de creación de la entrada. (Hecho. Falta que solo muestre la fecha sin la hora y agregar para que en la tabla se vea en que fecha se generó la entrada y el usuairo que lo genero ¿?)
 
 **Mejoras
 
-1) En la vista de "Ver proyectos" sería útil tener un botón de "Crear nuevo proyecto".
+1) En la vista de "Ver proyectos" sería útil tener un botón de "Crear nuevo proyecto". (Hecho)
 2) Ver la posibilidad de que haya comunicación entre adafruit y el sistema para llevar las asistencias.
-3) Que las asignaciones de tarea disparen correos electrónicos. Eventualmente podrían ser mensajes o notificaciones push ¿?
+3) Que las asignaciones de tarea disparen correos electrónicos. Eventualmente podrían ser mensajes o notificaciones push ¿? 
 4) En los casos en donde sea conveniente, evaluar la posibilidad de exportar tablas o info a excel u otro formato de utilidad. Por ejemplo, en el armado de los reportes semanales.
+5) Agregar botones de volver atras en todas las vistas de tablas ¿?.
+6) En relación con el envío de notificaciones al crearse una tarea, podría agregarse un "botón" del estilo swicht para que los usuarios se "suscriban", por ejemplo a un proyecto,
+de modo que sea notificado cada vez que hay una actualización. (Podría ser una propiedad en el modelo de proyecto que almacene los nombres de los usuarios suscritos y 
+eventualmente, al ejecutarse ciertas lógicas que impliquen cambios en el proyecto, se use esa propiedad para saber a quien hay que notificar).

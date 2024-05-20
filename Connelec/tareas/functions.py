@@ -10,8 +10,8 @@ def notificar_encargado(tarea_id, usuario):
 
     tarea = Tareas.objects.get(id=tarea_id)
     correo_encargado = User.objects.get(username=tarea.encargado).email
-    # url_tarea = f'https://{settings.ALLOWED_HOSTS[0]}/tareas/explorarTarea/{tarea.nombre}'
-    url_tarea = f'http://{settings.ALLOWED_HOSTS[2]}:8000/tareas/explorarTarea/{tarea.nombre}'
+    url_tarea = f'https://{settings.ALLOWED_HOSTS[0]}/tareas/explorarTarea/{tarea.nombre}'
+    # url_tarea = f'http://{settings.ALLOWED_HOSTS[2]}:8000/tareas/explorarTarea/{tarea.nombre}'
     template = get_template('tareas/tarea_correo.html')
     data = {
         'usuario': usuario,
