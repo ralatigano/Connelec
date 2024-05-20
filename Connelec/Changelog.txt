@@ -1,5 +1,10 @@
 --- 20/5/2024 ---
 
+********** Commit fqGd6fuG *********
+
+App: tareas
+*Corrección sobre el modelo entrada_historial agregando correctamente la propiedad usuario.
+
 ********** Commit 82xK3Myj *********
 
 General - templates

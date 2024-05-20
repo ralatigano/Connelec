@@ -38,8 +38,8 @@ class Tareas(models.Model):
 
 class Entrada_historial(models.Model):
     fecha = models.DateTimeField(null=True, blank=True, default=None)
-    # usuario = models.ForeignKey(
-    #    settings.AUTH_USER_MODEL, on_delete = models.CASCADE, default = None, blank = True, null = True)
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, blank=True, null=True)
     resumen = models.TextField(max_length=1000)
     proyecto = models.ForeignKey(
         "proyectos.Proyectos", on_delete=models.CASCADE)
