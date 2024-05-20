@@ -1,0 +1,21 @@
+--- 20/5/2024 ---
+
+********** Commit 82xK3Myj *********
+
+General - templates
+*En los templates que tienen tablas, se agrega el botón de volver atras arriba de la tabla de modo que no sea necesario hacer el scroll hasta el final para encontrarlo.
+En los casos en que corresponde, el botón de "Crear nueva/o..." también se incorpora en esta parte de la plantilla.
+
+App: tareas
+*Cambios en el modelo de entrada_historial, agregando una propiedad "fecha" que se corresponde con la fecha que se ingresa en el formulario cuando se crea una nueva instancia de este modelo.
+*Cambios en el modelo de entrada_historial, agregando una propiedad usuario para que se registre quien hace cada actualización.
+*Cambios en la lógica de las vistas relacionadas a la creación y registro de entradas de modo que se ajusten al nuevo modelo.
+*Cambios en el template de entradas asociadas a un proyecto para que muestre nueva información disponible.
+*Correcciones de algunos errores que provocaban que no se pueda visualizar la BBDD en el panel de administrador.
+*Corrrección del template de ver tareas asociadas a un proyecto de modo que posicione correctamente su botón.
+*Corrección del template de ver tareas y ver mis tareas para que el modal de editar tarea funcione correctamente mostrando la descripción de la tarea.
+*Se agregan botones en los templates de ver tareas y ver mis tareas para poder ingresar al menu de crear tareas desde ellos sin tener que volver al menú incicial de tareas.
+
+App: proyectos
+*Se extiende el límite de caracteres de la propiedad n_expediente a 200.
+*Corrección en la lógica de la vista correspondiente de modo que la edición de esta propiedad permita corregir información ya ingresada o incluir nueva información sin perder la anterior. 
