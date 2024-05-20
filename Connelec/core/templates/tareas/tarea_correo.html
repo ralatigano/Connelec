@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <!-- <header>
+    {% block header %}
+    <div class="saludo">
+        <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
+    </div>
+    {% endblock %}
+    </header> -->
+    {% block content %}
+        <img src="https://i.ibb.co/kqGyw8m/Isologotipo-transparente.png" alt="Isologotipo-transparente">
+        <br>
+        <h1>-- Nueva tarea asignada --</h1>
+        <br>
+        <p>El usuario <strong>{{usuario}}</strong> le ha asignado una nueva tarea. Puede seguir el siguiente enlace para verla.</p>
+        <br>
+        <a href="{{url_tarea}}">Ver nueva tarea</a>
+        <br>
+        <h2>-- Detalles de la tarea --</h2>
+        <p><strong>Título de la tarea:</strong> {{tarea_nombre}}</p>
+        <p><strong>Descripción:</strong> {{tarea_descrip}}</p>
+        <p>
+            <strong>Fecha de entrega:</strong>                                         
+            {% if tarea_fecha_entrega == None %}
+                <p>Sin definir</p>
+            {% else %}
+                {{tarea_fecha_entrega}}
+            {% endif %}
+        </p>
+        <p>
+            <strong>Proyecto:</strong>
+            {% if tarea_proyecto == None %}
+                <p>Sin definir</p>
+            {% else %}
+                {{tarea_proyecto}}
+            {% endif %}
+        </p>
+        <br>
+        <br>
+        <p>Este es un mensaje automático. Por favor, no responda este mail.</p>
+    {% endblock %}
+</body>
+</html>

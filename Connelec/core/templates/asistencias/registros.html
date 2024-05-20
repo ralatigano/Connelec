@@ -12,6 +12,8 @@
     {% block content %}
     <div class="container">
         <h1>Lista de asistencias</h1>
+        <br>
+        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
         <div>
             <table id="tabla_registros" class="table table-hover">
                 <thead>
@@ -37,7 +39,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
     </div>
         <!-- Custom Js -->
     <script src="{% static 'asistencias/js/registros.js' %}"></script>

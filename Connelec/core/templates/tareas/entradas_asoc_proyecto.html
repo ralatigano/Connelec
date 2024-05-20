@@ -11,6 +11,8 @@
     <div class="container">
         <h1>Histórico proyecto: {{proyecto}}</h1>
         <h6>Número de expediente: {{n_expediente}}</h6>
+        <br>
+        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
     </div>
     <!-- <div class="row">     -->
         <div class="container">
@@ -21,13 +23,15 @@
                             <th class="centered">Fecha</th>
                             <th class="centered">Información</th>
                             <th class="centered">Archivo</th>
+                            <th class="centered">Fecha de actualización</th>
+                            <th class="centered">Actualizado por:</th>
 
                         </tr>
                     </thead>
                     <tbody id="tableBody_Entradas">
                         {% for e in Entries %}
                             <tr>
-                                <td>{{e.fecha_actualizacion}}</td>
+                                <td>{{e.fecha.date}}</td>
                                 <td>{{e.resumen}}</td>
                                 <td>
                                     {% if e.adjunto %}
@@ -36,6 +40,8 @@
                                         <p>Sin archivo</p>
                                     {% endif %}
                                 </td>
+                                <td>{{e.fecha_creacion}}</td>
+                                <td>{{e.usuario}}</td>
                                                          
                             </tr>
                         {% endfor %} 

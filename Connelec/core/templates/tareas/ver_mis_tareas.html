@@ -9,7 +9,10 @@
 <body>
     {% block content %}
     <div class="container">
-        <h1>Tareas</h1>
+        <h1>Mis tareas</h1>
+        <br>
+        <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+
     </div>
     <!-- <div class="row">     -->
         <div class="container">
@@ -29,32 +32,31 @@
                             <th class="centered">Explorar</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody_Clientes">
+                    <tbody id="tableBody_Tareas">
                         {% for t in Tars %}
                             <tr>
-                                <tr>
-                                    <td>{{t.nombre}}</td>
-                                    <td>{{t.descrip}}</td>
-                                    <td>{{t.encargado}}</td>
-                                    <td>{{t.estado}}</td>
-                                    <td>
-                                        {% if t.fecha_entrega == None %}
-                                            <p>Sin definir</p>
-                                        {% else %}
-                                            {{t.fecha_entrega}}
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if t.proyecto == None %}
-                                            <p>Ninguno</p>
-                                        {% else %}
-                                            {{t.proyecto}}
-                                        {% endif %}
-                                    </td>
-                                    <td>{{t.fecha_creacion}}</td>
-                                    <td>{{t.fecha_actualizacion}}</td>
+                                <td>{{t.nombre}}</td>
+                                <td>{{t.descrip}}</td>
+                                <td>{{t.encargado}}</td>
+                                <td>{{t.estado}}</td>
                                 <td>
-                                    <button type="button" id="editarTarea" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarTareaModal" data-bs-whatever="{{t.nombre}}|{{c.descrip}}|{{t.encargado}}|{{t.estado}}|{{t.fecha_entrega}}|{{t.proyecto}}" onclick="showEditarTareaModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
+                                    {% if t.fecha_entrega == None %}
+                                        <p>Sin definir</p>
+                                    {% else %}
+                                        {{t.fecha_entrega}}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if t.proyecto == None %}
+                                        <p>Ninguno</p>
+                                    {% else %}
+                                        {{t.proyecto}}
+                                    {% endif %}
+                                </td>
+                                <td>{{t.fecha_creacion}}</td>
+                                <td>{{t.fecha_actualizacion}}</td>
+                                <td>
+                                    <button type="button" id="editarTarea" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarTareaModal" data-bs-whatever="{{t.nombre}}|{{t.descrip}}|{{t.encargado}}|{{t.estado}}|{{t.fecha_entrega}}|{{t.proyecto}}" onclick="showEditarTareaModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
                                 </td>
                                 <td>
                                     <a href="explorarTarea/{{t.nombre}}"><button type="button" class="btn btn-dark btn-xs" ><i class="fa-solid fa-eye"></i></button></a>
@@ -68,7 +70,7 @@
             </div>
         </div>
         <div class="container">
-            <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
         </div>
         
     <!-- </div> -->

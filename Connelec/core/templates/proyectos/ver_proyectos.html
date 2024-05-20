@@ -39,7 +39,7 @@
                                     {% else %}
                                         <p>Sin expediente</p>
                                     {% endif %}
-                                    <button type="button" id="editarProyecto" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarProyectoModal" data-bs-whatever="{{p.nombre}}"><i class="fa-solid fa-pencil sm"></i></button>
+                                    <button type="button" id="editarProyecto" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarProyectoModal" data-bs-whatever="{{p.nombre}}:{{p.n_expediente}}"><i class="fa-solid fa-pencil sm"></i></button>
                                 </td>
                                 <td>
                                     <a href="/tareas/porProyecto/{{p.nombre}}"><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-clipboard-list"></i></button></a>
