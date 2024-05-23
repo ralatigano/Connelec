@@ -2,18 +2,15 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} {% endblock %}</title>
-</head>
-<body>
-    <!-- <header>
-    {% block header %}
-    <div class="saludo">
-        <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
-    </div>
-    {% endblock %}
-    </header> -->
-    {% block content %}
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        {% block header %}
+        <h1>Hola {{usuario}}</h1>
+        {% endblock %}
+
+        {% block content %}
         <img src="https://i.ibb.co/kqGyw8m/Isologotipo-transparente.png" alt="Isologotipo-transparente">
         <br>
         <h1>-- Nueva tarea asignada --</h1>
@@ -44,6 +41,10 @@
         <br>
         <br>
         <p>Este es un mensaje automático. Por favor, no responda este mail.</p>
-    {% endblock %}
-</body>
+        {% endblock %}
+
+        {% block footer %} 
+        
+        {% endblock %}
+    </body>
 </html>

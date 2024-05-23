@@ -41,13 +41,6 @@ def crear_proyecto(request):
                 descripcion=request.POST['descripcion'],
                 cliente=Cliente.objects.get(nombre=request.POST['cliente'])
             )
-            # if request.POST['cliente'] != 'Ninguno':
-            #    pro = Proyectos.objects.last()
-            #    try:
-            #        pro.cliente = Cliente.objects.get(nombre=request.POST['cliente'])
-            #        pro.save()
-            #    except Exception as e:
-            #        messages.error(request, 'Hubo un error al intentar asignar el proyecto a el cliente: ' + str(e) + '.')
             messages.success(request, 'Proyecto creado con exito.')
         except Exception as e:
             messages.error(
@@ -64,13 +57,12 @@ def crear_proyecto(request):
 
 
 def editar_proyecto(request):
-
     try:
         p = Proyectos.objects.get(nombre=request.POST['nombre'])
-        if p.n_expediente != None and p.n_expediente != request.POST['n_expediente']:
+        if request.POST['n_expediente'] and p.n_expediente != request.POST['n_expediente']:
             p.n_expediente = request.POST['n_expediente']
-        p.save()
-        messages.success(request, 'Proyecto editado con exito.')
+            p.save()
+            messages.success(request, 'Proyecto editado con exito.')
     except Exception as e:
         messages.error(
             request, 'Hubo un error al editar el proyecto: ' + str(e) + '.')

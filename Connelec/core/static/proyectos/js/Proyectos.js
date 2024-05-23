@@ -27,7 +27,6 @@ const initDataTable=async() => {
 
 window.addEventListener("load", async() => {
     await initDataTable();
-    //document.getElementById("nav_item_clientes").style.fontWeight = "bold";
 });
 
 
@@ -37,7 +36,7 @@ editarProyectoModal.addEventListener('show.bs.modal', async event => {
   const button = event.relatedTarget
   //obtengo el código del producto y su nombre para mostrarlo en el modal
   const recipient = button.getAttribute('data-bs-whatever')
-  var partes = recipient.split(':');
+  var partes = recipient.split('`');
 
   const nombre = partes[0];
   const n_expediente= partes[1];

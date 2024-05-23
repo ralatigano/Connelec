@@ -3,12 +3,11 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Tarea {% endblock %}</title>
-</head>
-<body>
-    {% block content %}
-    <div class="container">
+    <head>
+        <title>{% block title %} Tarea {% endblock %}</title>
+    </head>
+    <body>
+        {% block header %}
         <h1>Explorar tarea: {{Tarea.nombre}}</h1>
         <h2>
             del proyecto: 
@@ -18,39 +17,40 @@
                 Ninguno
             {% endif %}
         </h2>
-    </div>
-    <div class="container">
-        <h3>Descripción: {{Tarea.descrip}}</h3>
-        <br>
-        <h3>
-            Encargado: 
-            {% if Tarea.encargado != None %}
-                {{Tarea.encargado}}
-            {% else %}
-                Sin asignar
-            {% endif %}
-        </h3>
-        <br>
-        <h3>Estado: {{Tarea.estado}}</h3>
-        <br>
-        <h3>
-            Fecha de entrega:
-            {% if Tarea.fecha_entrega != None %} 
-                {{Tarea.fecha_entrega}}
-            {% else %}
-                Sin definir
-            {% endif %} 
-        </h3>
-        <br>
-        <h3>Fecha de creación: {{Tarea.fecha_creacion}}</h3>
-        <br>
-        <h3>Fecha de actualización: {{Tarea.fecha_actualizacion}}</h3>
-        <br>
-    </div>
-    <!-- <div class="row">     -->
+        {% endblock %}
+
+        {% block content %}
+        <div class="container">
+            <h3>Descripción: {{Tarea.descrip}}</h3>
+            <br>
+            <h3>
+                Encargado: 
+                {% if Tarea.encargado != None %}
+                    {{Tarea.encargado}}
+                {% else %}
+                    Sin asignar
+                {% endif %}
+            </h3>
+            <br>
+            <h3>Estado: {{Tarea.estado}}</h3>
+            <br>
+            <h3>
+                Fecha de entrega:
+                {% if Tarea.fecha_entrega != None %} 
+                    {{Tarea.fecha_entrega}}
+                {% else %}
+                    Sin definir
+                {% endif %} 
+            </h3>
+            <br>
+            <h3>Fecha de creación: {{Tarea.fecha_creacion}}</h3>
+            <br>
+            <h3>Fecha de actualización: {{Tarea.fecha_actualizacion}}</h3>
+            <br>
+        </div>
         <div class="container">
             <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                <table id="Clientes" class="table table-hover table table-striped">
+                <table id="Archivos" class="table table-hover table table-striped">
                     <thead>
                         <tr>
                             <th class="centered">#</th>
@@ -59,7 +59,7 @@
                             <th class="centered">Descargar</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody_Clientes">
+                    <tbody id="tableBody_Archivos">
                         {% for f in Files %}
                             <tr>
                                 <td>{{loop.index}}</td>
@@ -68,16 +68,16 @@
                                 <td><a href="{{f.archivo.url}}" download><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-download"></i></button></a></td>
                             </tr>
                         {% endfor %} 
-
                     </tbody>
-
                 </table>
             </div>
-            <a href="/tareas/verTareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
-    <!-- </div> -->
-    <!-- Custom Js -->
-    <script src="{% static 'tareas/js/Tareas.js' %}"></script>
-    {% endblock %}
-</body>
+        <!-- Custom Js -->
+        <script src="{% static 'tareas/js/Archivos.js' %}"></script>
+        {% endblock %}
+            
+        {% block footer %}
+        <a href="/tareas/verTareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        {% endblock %}
+    </body>
 </html>

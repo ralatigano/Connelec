@@ -3,90 +3,87 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Registro reportes {% endblock %}</title>
-    {% block navbar %}
-    {% endblock %}
-</head>
-<body>
-    {% block content %}
-    <div class="container">
+    <head>
+        <title>{% block title %} Registro reportes {% endblock %}</title>
+    </head>
+    <body>
+        {% block header %}
         <h1>Lista de reportes</h1>
         <br>
         <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
-        <div>
-            <table id="tabla_reportes" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="centered">Número</th>
-                        <th class="centered">Nombre</th>
-                        <th class="centered">Informe</th>
-                        <th class="centered">Proyecto</th>
-                        <th class="centered">Fecha y hora</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla_reportes">
-                    {% for r in reportes %}
-                    
+        {% endblock %}
+
+        {% block content %}
+        <div class="container">
+            <div>
+                <table id="tabla_reportes" class="table table-hover">
+                    <thead>
                         <tr>
-                            <td>{{r.id}}</td>
-                            <td>{{r.usuario}}</td>
-                            <td>{{r.informe}}</td>
-                            <td>
-                                {% if r.proyecto == None %}
-                                    <p>Ninguno</p>
-                                {% else %}
-                                    {{r.proyecto}}
-                                {% endif %}
-                                <button type="button" id="editarReporte" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarReporteModal" data-bs-whatever="{{r.id}}" onclick="showEditarReporteModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
-                            </td>
-                            <td>{{r.fecha}} {{r.hora}}</td>
+                            <th class="centered">Número</th>
+                            <th class="centered">Nombre</th>
+                            <th class="centered">Informe</th>
+                            <th class="centered">Proyecto</th>
+                            <th class="centered">Fecha y hora</th>
                         </tr>
-                    
-                    {% endfor %}
-
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="tabla_reportes">
+                        {% for r in reportes %}
+                            <tr>
+                                <td>{{r.id}}</td>
+                                <td>{{r.usuario}}</td>
+                                <td>{{r.informe}}</td>
+                                <td>
+                                    {% if r.proyecto == None %}
+                                        <p>Ninguno</p>
+                                    {% else %}
+                                        {{r.proyecto}}
+                                    {% endif %}
+                                    <button type="button" id="editarReporte" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarReporteModal" data-bs-whatever="{{r.id}}" onclick="showEditarReporteModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
+                                </td>
+                                <td>{{r.fecha}} {{r.hora}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
         </div>
-        <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
-    </div>
-
-     <!-- Modal Editar Reporte -->
-     <div class="modal fade" id="editarReporteModal" tabindex="-1" aria-labelledby="editarReporteModalLabel" data-bs-backdrop="static" aria-hidden="true">   
-        <form action="editarReporte" method="POST">
-            {% csrf_token %}
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editarProyectoModal">Asociar el reporte a un proyecto:</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input id="id" name="id" hidden>
-
-                        <div class="form-group">
-                            <label for="proyecto">Proyecto:</label>
-                            <select name="proyecto" id="proyecto">
-                            </select>
+        
+        <!-- Modal Editar Reporte -->
+        <div class="modal fade" id="editarReporteModal" tabindex="-1" aria-labelledby="editarReporteModalLabel" data-bs-backdrop="static" aria-hidden="true">   
+            <form action="editarReporte" method="POST">
+                {% csrf_token %}
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editarProyectoModal">Asociar el reporte a un proyecto:</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <div class="modal-body">
+                            <input id="id" name="id" hidden>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</a></button> 
+                            <div class="form-group">
+                                <label for="proyecto">Proyecto:</label>
+                                <select name="proyecto" id="proyecto">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</a></button> 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-
-
-
-
-
+            </form>
+        </div>
 
         <!-- Custom Js -->
-    <script src="{% static 'asistencias/js/reportes.js' %}"></script>
-    {% endblock %}
-</body>
+        <script src="{% static 'asistencias/js/reportes.js' %}"></script>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>

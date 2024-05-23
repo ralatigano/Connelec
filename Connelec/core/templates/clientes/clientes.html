@@ -3,24 +3,27 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Menu clientes {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
-    <div class="saludo">
-        <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
-    </div>
-    {% endblock %}
-    </header>
-    {% block content %}
+    <head>
+        <title>{% block title %} Menu clientes {% endblock %}</title>
+    </head>
+    <body>
 
-    <div class="botonera">
-        <a href="verClientes"><button type="button" class="btn btn-outline-dark">Ver clientes</button></a>
-        <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
-        <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-    </div>
-    {% endblock %}
-</body>
+        {% block header %}
+        <div class="saludo">
+            <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
+        </div>
+        {% endblock %}
+
+        {% block content %}
+        <div class="botonera">
+            <a href="verClientes"><button type="button" class="btn btn-outline-dark">Ver clientes</button></a>
+            <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
+            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        </div>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>

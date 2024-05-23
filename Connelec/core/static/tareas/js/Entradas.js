@@ -20,12 +20,13 @@ const initDataTable=async() => {
                 next: 'Siguiente',
                 previous: 'Anterior'
             }
-        }
+        },
+        columnDefs: [ { targets: 0, type: 'date' } ],
+        order: [[ 0, "desc" ]]
     });
     dataTableIsInitilized=true;
 }
 
 window.addEventListener("load", async() => {
     await initDataTable();
-    //document.getElementById("nav_item_clientes").style.fontWeight = "bold";
 });

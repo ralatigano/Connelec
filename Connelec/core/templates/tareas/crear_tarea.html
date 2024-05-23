@@ -3,73 +3,74 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Nueva tarea {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
+    <head>
+        <title>{% block title %} Nueva tarea {% endblock %}</title>
+    </head>
+    <body>
 
-    {% endblock %}
-    </header>
-    {% block content %}
-    <div class="container">
+        {% block header %}
         <h1>Crear nueva tarea</h1>
-    </div>
-    <div class="botonera">
-        <div>
-            <form action="" method="post" class="formulario" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="nombre">Título:</label>
-                    <input type="text" id = "nombre" name="nombre" placeholder="Título de la tarea" required>
-                </div>
-                <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
-                    <textarea rows="4" cols="50" id = "descripcion" name="descripcion" placeholder="Si lo considera necesario, agregue una descripción de la tarea"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="proyecto">Proyecto:</label>
-                    <select name="proyecto" id="proyecto">
-                        <option value="Ninguno">Ninguno</option>
-                        {% for p in Proys %}
-                            <option value="{{p.nombre}}">{{p.nombre}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="encargado">Encargado:</label>
-                    <select name="encargado" id="encargado">
-                        <option value="Ninguno">Ninguno</option>
-                        {% for u in Usus %}
-                            <option value="{{u.username}}">{{u.username}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="estado">Estado:</label>
-                    <select name="estado" id="estado">
-                        <option value="Sin asignar">Sin asignar</option>
-                        <option value="Asignado/Sin iniciar">Asignado/Sin iniciar</option>
-                        <option value="En proceso">En proceso</option>
-                        <option value="Hecho">Hecho</option>
-                        <option value="En pausa">En pausa</option>
-                        <option value="Cancelado">Cancelado</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fecha_entrega">Fecha de entrega:</label>
-                    <input type="date" id="fecha_entrega" name="fecha_entrega" format="%Y-%m-%d">
-                </div>
-                <div class="form-group">
-                    <label for="adjunto">Archivo/s:</label>
-                    <input type="file" name="adjunto" id="adjunto" multiple placeholder="Suba uno o varios archivos si corresponde">
-                </div>
-                <button type="submit" id="submit" class="btn btn-outline-dark">Crear tarea</button>
-            </form>
+        {% endblock %}
+
+        {% block content %}
+        <div class="botonera">
+            <div>
+                <form action="" method="post" class="formulario" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre">Título:</label>
+                        <input type="text" id = "nombre" name="nombre" placeholder="Título de la tarea" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea rows="4" cols="50" id = "descripcion" name="descripcion" placeholder="Si lo considera necesario, agregue una descripción de la tarea"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="proyecto">Proyecto:</label>
+                        <select name="proyecto" id="proyecto">
+                            <option value="Ninguno">Ninguno</option>
+                            {% for p in Proys %}
+                                <option value="{{p.nombre}}">{{p.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="encargado">Encargado:</label>
+                        <select name="encargado" id="encargado">
+                            <option value="Ninguno">Ninguno</option>
+                            {% for u in Usus %}
+                                <option value="{{u.username}}">{{u.username}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado:</label>
+                        <select name="estado" id="estado">
+                            <option value="Sin asignar">Sin asignar</option>
+                            <option value="Asignado/Sin iniciar">Asignado/Sin iniciar</option>
+                            <option value="En proceso">En proceso</option>
+                            <option value="Hecho">Hecho</option>
+                            <option value="En pausa">En pausa</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_entrega">Fecha de entrega:</label>
+                        <input type="date" id="fecha_entrega" name="fecha_entrega" format="%Y-%m-%d">
+                    </div>
+                    <div class="form-group">
+                        <label for="adjunto">Archivo/s:</label>
+                        <input type="file" name="adjunto" id="adjunto" multiple placeholder="Suba uno o varios archivos si corresponde">
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-outline-dark">Crear tarea</button>
+                </form>
+            </div>
+            <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
-        <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-    </div>
-    {% endblock %}
-</body>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>

@@ -5,7 +5,6 @@ from django.contrib.auth.views import LoginView
 urlpatterns = [
     path('registrarse', registrarse, name='registrarse'),
     path('', iniciar_sesion, name='login'),
-    # path('', LoginView.as_view(template_name='core/login.html'), name='login'),
     path('logout', cerrar_sesion, name='logout'),
     path('inicio', inicio, name='inicio'),
     path('perfil', editar_perfil, name='perfil'),

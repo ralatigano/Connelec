@@ -3,23 +3,27 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Menu proyectos {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
-    <div class="saludo">
-        <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
-    </div>
-    {% endblock %}
-    </header>
-    {% block content %}
-    <div class="botonera">
-        <a href="verProyectos"><button type="button" class="btn btn-outline-dark">Ver proyectos</button></a>
-        <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
-        <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-    </div>
-    {% endblock %}
-</body>
+    <head>
+        <title>{% block title %} Menu proyectos {% endblock %}</title>
+    </head>
+    <body>
+
+        {% block header %}
+        <div class="saludo">
+            <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
+        </div>
+        {% endblock %}
+
+        {% block content %}
+        <div class="botonera">
+            <a href="verProyectos"><button type="button" class="btn btn-outline-dark">Ver proyectos</button></a>
+            <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
+            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        </div>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>

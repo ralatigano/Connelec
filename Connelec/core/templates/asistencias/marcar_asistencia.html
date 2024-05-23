@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Marcar Asistencia {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
+    <head>
+        <title>{% block title %} Marcar Asistencia {% endblock %}</title>
+    </head>
+    <body>
+
+        {% block header %}
         {% if messages%}
             {% for message in messages %}
                 <div>
@@ -16,9 +16,9 @@
                 </div>
             {% endfor %}
         {% endif %}
-    {% endblock %}
-    </header>
-    {% block content %}
+        {% endblock %}
+
+        {% block content %}
         <div class="botonera">
             <form class="formulario" action="marcarAsistencia" method="post">
                 {% csrf_token %}
@@ -38,14 +38,12 @@
                     <label for="fecha" style="font-weight: bold">Fecha</label>
                     <br>
                     <input type="date" id="fecha" name="fecha" format="%Y-%m-%d" value="{{fecha}}" required>
-                    <!-- <input type="text" id="fecha" name="fecha" class="form-control" value="{{fecha}}" required> -->
                 </div>
 
                 <div class="form-group hora">
                     <label for="hora" style="font-weight: bold">Hora</label>
                     <br>
                     <input type="time" id="hora" name="hora" value="{{hora}}" required>
-                    <!-- <input type="text" id="hora" name="hora" class="form-control" value="{{hora}}" required> -->
                 </div>
 
                 
@@ -64,26 +62,14 @@
                     </select>
                 </div>
                 
-                <!-- <div class="form-group fecha">{{form.usuario.label}}</div>
-                <div class="form-group fecha" aria-valuetext="Probando">{{form.usuario}}</div>
-                <br>
-                <div class="form-group fecha">{{form.fecha.label}}</div>
-                <div class="form-group fecha">{{form.fecha}}</div>
-                <br>
-                <div class="form-group fecha">{{form.hora.label}}</div>
-                <div class="form-group fecha">{{form.hora}}</div>
-                <br>
-                <div class="form-group fecha">{{form.tipo.label}}</div>
-                <div class="form-group fecha">{{form.tipo}}</div> -->
-                <br>   
-
-
-                <!-- {{ form.as_p }} -->
                 <button type="submit" id="submit" class="btn btn-outline-dark">Guardar</button>
                 <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
             </form>
             
         </div>
-    {% endblock %}
-</body>
+        {% endblock %}
+        {% block footer %}
+        
+        {% endblock %}
+    </body>
 </html>

@@ -20,7 +20,9 @@ const initDataTable=async() => {
                 next: 'Siguiente',
                 previous: 'Anterior'
             }
-        }
+        },
+        columnDefs: [ { targets: 4, type: 'date' } ],
+        order: [[ 4, "desc" ]]
     });
     dataTableIsInitilized=true;
 }
@@ -37,9 +39,6 @@ editarReporteModal.addEventListener('show.bs.modal', async event => {
   //obtengo el código del producto y su nombre para mostrarlo en el modal
   const id = button.getAttribute('data-bs-whatever')
 
-  //cambio el texto del título del modal
-  //const modalTitle = editarTareaModal.querySelector('.modal-title')
-  //modalTitle.textContent = `Editar Tarea: ${nombre}`
 
   $("#id").val(id);
   
@@ -54,7 +53,6 @@ async function showEditarReporteModal(button){
     try{
         var response = await fetch(`/tareas/infoEditarTarea`);
         var data = await response.json();
-        //console.log(data);
         
         var cardContentProys = `
             <option value="Ninguno">Ninguno</option>

@@ -3,60 +3,54 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Histórico {% endblock %}</title>
-</head>
-<body>
-    {% block content %}
-    <div class="container">
+    <head>
+        <title>{% block title %} Histórico {% endblock %}</title>
+    </head>
+    <body>
+        {% block header %}
         <h1>Histórico proyecto: {{proyecto}}</h1>
         <h6>Número de expediente: {{n_expediente}}</h6>
-        <br>
         <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
-    </div>
-    <!-- <div class="row">     -->
-        <div class="container">
-            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                <table id="Entradas" class="table table-hover table table-striped">
-                    <thead>
+        {% endblock %}
+
+        {% block content %}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <table id="Entradas" class="table table-hover table table-striped">
+                <thead>
+                    <tr>
+                        <th class="centered">Fecha</th>
+                        <th class="centered">Información</th>
+                        <th class="centered">Archivo</th>
+                        <th class="centered">Fecha de actualización</th>
+                        <th class="centered">Actualizado por:</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody_Entradas">
+                    {% for e in Entries %}
                         <tr>
-                            <th class="centered">Fecha</th>
-                            <th class="centered">Información</th>
-                            <th class="centered">Archivo</th>
-                            <th class="centered">Fecha de actualización</th>
-                            <th class="centered">Actualizado por:</th>
-
+                            <td>{{e.fecha.date}}</td>
+                            <td>{{e.resumen}}</td>
+                            <td>
+                                {% if e.adjunto %}
+                                    <a href="{{e.adjunto.url}}" download><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-download"></i></button></a>
+                                {% else %}
+                                    <p>Sin archivo</p>
+                                {% endif %}
+                            </td>
+                            <td>{{e.fecha_creacion}}</td>
+                            <td>{{e.usuario}}</td>                        
                         </tr>
-                    </thead>
-                    <tbody id="tableBody_Entradas">
-                        {% for e in Entries %}
-                            <tr>
-                                <td>{{e.fecha.date}}</td>
-                                <td>{{e.resumen}}</td>
-                                <td>
-                                    {% if e.adjunto %}
-                                        <a href="{{e.adjunto.url}}" download><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-download"></i></button></a>
-                                    {% else %}
-                                        <p>Sin archivo</p>
-                                    {% endif %}
-                                </td>
-                                <td>{{e.fecha_creacion}}</td>
-                                <td>{{e.usuario}}</td>
-                                                         
-                            </tr>
-                        {% endfor %} 
-
-                    </tbody>
-
-                </table>
-            </div>
+                    {% endfor %} 
+                </tbody>
+            </table>
         </div>
-        <div class="container">
-            <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
-        </div>
-        
-    <!-- Custom Js -->
-    <script src="{% static 'tareas/js/Entradas.js' %}"></script>
-    {% endblock %}
-</body>
+
+        <!-- Custom Js -->
+        <script src="{% static 'tareas/js/Entradas.js' %}"></script>
+        {% endblock %}
+            
+        {% block footer %}
+        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+        {% endblock %}
+    </body>
 </html>

@@ -5,13 +5,13 @@ const initDataTable=async() => {
     if(dataTableIsInitilized){
         dataTable.destroy();
     }
-    dataTable=$("#tabla_registros").DataTable({
+    dataTable=$("#Archivos").DataTable({
         language: {
-            lengthMenu: 'Mostrar _MENU_ registros por página',
-            zeroRecords: 'No hay registros guardados',
-            info: 'Mostrando de _START_ a _END_ de _TOTAL_ registros',
-            infoEmpty: 'No hay presupuestos',
-            InfoFiltered: '(filtrado de _MAX_ registros totales)',
+            lengthMenu: 'Mostrar _MENU_ archivos por página',
+            zeroRecords: 'No hay archivos registrados',
+            info: 'Mostrando de _START_ a _END_ de _TOTAL_ archivos',
+            infoEmpty: 'No hay tareas',
+            InfoFiltered: '(filtrado de _MAX_ archivos totales)',
             search: 'Buscar:',
             LoadingRecords: 'Cargando...',
             paginate: {
@@ -20,9 +20,7 @@ const initDataTable=async() => {
                 next: 'Siguiente',
                 previous: 'Anterior'
             }
-        },
-        columnDefs: [ { targets: 3, type: 'date' } ],
-        order: [[ 3, "desc" ]]
+        }
     });
     dataTableIsInitilized=true;
 }

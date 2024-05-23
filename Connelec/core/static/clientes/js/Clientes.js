@@ -27,7 +27,6 @@ const initDataTable=async() => {
 
 window.addEventListener("load", async() => {
     await initDataTable();
-    document.getElementById("nav_item_clientes").style.fontWeight = "bold";
 });
 
 
@@ -38,9 +37,8 @@ editarClienteModal.addEventListener('show.bs.modal', event => {
   //obtengo el código del producto y su nombre para mostrarlo en el modal
   const recipient = button.getAttribute('data-bs-whatever')
   console.log(recipient);
-  var partes = recipient.split('|');
+  var partes = recipient.split('`');
 
-  //{{c.nombre}}|{{c.razon_social}}|{{c.cuit}}|{{c.telefono}}|{{c.email}}|{{c.direccion}}|{{c.provincia}}
   const nombre = partes[0];
   const razon_social = partes[1];
   const cuit = partes[2];

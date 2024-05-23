@@ -6,7 +6,6 @@ import uuid
 import os
 from django.core.files.storage import default_storage
 from PIL import Image
-# User= get_user_model()
 
 # Create your models here.
 
@@ -14,8 +13,6 @@ from PIL import Image
 class registro(models.Model):
     usuario = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # nombre = models.CharField(default=usuario.first_name, max_length=50, readonly=True, null=True)
-    # apellido = models.CharField(default=usuario.last_name, max_length=50, readonly=True, null=True)
     fecha = models.DateField()
     hora = models.TimeField()
     tipo = models.CharField(max_length=50, choices=[(

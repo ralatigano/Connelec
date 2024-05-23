@@ -6,6 +6,7 @@ from django.contrib import messages
 
 app_name = 'clientes'
 
+
 def clientes(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -15,6 +16,7 @@ def clientes(request):
             'img': img
         }
     return render(request, 'clientes/clientes.html', data)
+
 
 def ver_clientes(request):
     if request.user.is_authenticated:
@@ -26,11 +28,12 @@ def ver_clientes(request):
         }
     return render(request, 'clientes/ver_clientes.html', data)
 
+
 def nuevo_cliente(request):
     if request.method == 'POST':
         try:
             Cliente.objects.create(
-                nombre = request.POST['nombre'],
+                nombre=request.POST['nombre'],
             )
             if request.POST['razon_social'] != '':
                 cliente = Cliente.objects.last()
@@ -57,16 +60,20 @@ def nuevo_cliente(request):
                 cliente.provincia = request.POST['provincia']
                 cliente.save()
             messages.success(request, 'Cliente creado con exito.')
+            return redirect('ver_clientes')
         except Exception as e:
-            messages.error(request, 'Hubo un error al crear el cliente: ' + str(e) + '.')
-    
-    return render(request, 'clientes/nuevo_cliente.html')
+            messages.error(
+                request, 'Hubo un error al crear el cliente: ' + str(e) + '.')
+    else:
+        usuario = User.objects.get(username=request.user).get_full_name()
+        data = {'usuario': usuario}
+        return render(request, 'clientes/nuevo_cliente.html', data)
 
 
 def editar_cliente(request):
     if request.method == 'POST':
         try:
-            cli = Cliente.objects.get(nombre = request.POST['nombre'])
+            cli = Cliente.objects.get(nombre=request.POST['nombre'])
             if request.POST['razon_social'] != cli.razon_social:
                 cli.razon_social = request.POST['razon_social']
             if request.POST['cuit'] != cli.cuit:
@@ -82,6 +89,7 @@ def editar_cliente(request):
             cli.save()
             messages.success(request, 'Cliente editado con exito.')
         except Exception as e:
-            messages.error(request, 'Hubo un error al editar el cliente: ' + str(e) + '.')
-    
+            messages.error(
+                request, 'Hubo un error al editar el cliente: ' + str(e) + '.')
+
     return redirect('ver_clientes')

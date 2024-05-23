@@ -7,9 +7,10 @@ from .functions import *
 from proyectos.models import Proyectos
 
 
-
 app_name = 'asistencias'
 # Create your views here.
+
+
 def asistencia(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -20,6 +21,7 @@ def asistencia(request):
         }
     return render(request, 'asistencias/asistencia.html', data)
 
+
 def hoy(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -27,21 +29,20 @@ def hoy(request):
         fecha = date.today().strftime("%Y-%m-%d")
         registros = registro.objects.filter(fecha=fecha).filter(usuario=id)
         hora_actual = datetime.today().time()
-        hora_actual_obj = datetime.strptime(str(hora_actual.hour)+':'+str(hora_actual.minute),'%H:%M')   
-        #print(f'fecha:{fecha}, id:{id}, registros:{registros}')
-        if len(registros)>0:
+        hora_actual_obj = datetime.strptime(
+            str(hora_actual.hour)+':'+str(hora_actual.minute), '%H:%M')
+        if len(registros) > 0:
             tiempo = calcular_horas_totales_hoy(registros, hora_actual_obj)
-            mensaje = f'Usted trabajo {tiempo} horas el dia de hoy.'
+            mensaje = f'Usted trabajó {tiempo} horas el dia de hoy.'
         else:
             mensaje = 'Todavía no se ha registrado una entrada para el día de hoy.'
-
-        #mensaje = f"Hora actual: {hora_actual}"
         data = {
             'usuario': usuario,
             'fecha': fecha,
             'mensaje': mensaje
         }
     return render(request, 'asistencias/hoy.html', data)
+
 
 def ver_periodo(request):
     Usus = User.objects.all()
@@ -55,7 +56,6 @@ def ver_periodo(request):
         fecha2_obj = datetime.strptime(fecha2_str, '%Y-%m-%d')
         mensaje = []
         mensaje = Calcular_horas(fecha1_obj, fecha2_obj, u_id)
-        #messages.success(request, 'Asistencia registrada con exito.')
         data = {
             'usuario': usuario,
             'username': username,
@@ -66,11 +66,9 @@ def ver_periodo(request):
         else:
             messages.success(request, mensaje[0])
         return render(request, 'asistencias/ver_periodo.html', data)
-    
+
     if request.user.is_authenticated:
         usuario = User.objects.get(username=username).get_full_name()
-        #user_id = User.objects.get(username=username).id
-        #fecha_guion = date.today().strftime("%Y-%m-%d")
         data = {
             'usuario': usuario,
             'username': username,
@@ -78,42 +76,39 @@ def ver_periodo(request):
         }
         return render(request, 'asistencias/ver_periodo.html', data)
 
+
 def marcar_asistencia(request):
     if request.method == 'POST':
-        #form = RegistroForm(request,request.POST)
-        #form.usuario = User.objects.get(username=request.POST['usuario'])
-        #form.instance.usuario = request.POST['usuario']
         try:
             usuario = request.POST['usuario']
             fecha_str = request.POST['fecha']
             fecha_obj = datetime.strptime(fecha_str, '%Y-%m-%d')
             hora = request.POST['hora']
             tipo = request.POST['tipo']
-            #print(request.POST)
             registro.objects.create(
-                usuario = User.objects.get(username=usuario),
-                fecha = fecha_obj,
-                hora = hora,
-                tipo = tipo
+                usuario=User.objects.get(username=usuario),
+                fecha=fecha_obj,
+                hora=hora,
+                tipo=tipo
             )
             messages.success(request, 'Asistencia registrada con exito.')
         except Exception as e:
-            messages.error(request, 'Hubo un error al registrar la asistencia: ' + str(e) + '.')
+            messages.error(
+                request, 'Hubo un error al registrar la asistencia: ' + str(e) + '.')
 
     if request.user.is_authenticated:
         Usus = User.objects.all()
         username = request.user
         usuario = User.objects.get(username=username).get_full_name()
         user_id = User.objects.get(username=username).id
-        #fecha = date.today().strftime("%d/%m/%Y")
         fecha_guion = date.today().strftime("%Y-%m-%d")
         hora = datetime.now().time()
-        #obtengo el último registro del usuario en el día de la fecha de modo de que el formulario induzca a marcar una entrada o salida según que sea lo último que se registró.
+        # obtengo el último registro del usuario en el día de la fecha de modo de que el formulario induzca a marcar una entrada o salida según que sea lo último que se registró.
         try:
-            ult_reg = registro.objects.filter(fecha=fecha_guion).filter(usuario=user_id).last().tipo
+            ult_reg = registro.objects.filter(
+                fecha=fecha_guion).filter(usuario=user_id).last().tipo
         except:
             ult_reg = None
-        #form = RegistroForm()
         data = {
             'usuario': usuario,
             'username': username,
@@ -124,16 +119,17 @@ def marcar_asistencia(request):
         }
     return render(request, 'asistencias/marcar_asistencia.html', data)
 
+
 def listar_registros(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
-        #id = User.objects.get(username=request.user).id
         registros = registro.objects.all()
         data = {
             'usuario': usuario,
             'registros': registros
         }
     return render(request, 'asistencias/registros.html', data)
+
 
 def reportes(request):
     if request.user.is_authenticated:
@@ -145,6 +141,7 @@ def reportes(request):
         }
     return render(request, 'asistencias/reportes.html', data)
 
+
 def ver_reportes(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -155,15 +152,16 @@ def ver_reportes(request):
         }
     return render(request, 'asistencias/ver_reportes.html', data)
 
+
 def crear_reporte(request):
     if request.method == 'POST':
         try:
             Reporte.objects.create(
-                usuario = User.objects.get(username=request.POST['usuario']),
-                informe = request.POST['informe'],
-                fecha = request.POST['fecha'],
-                hora = request.POST['hora'],
-                proyecto = None
+                usuario=User.objects.get(username=request.POST['usuario']),
+                informe=request.POST['informe'],
+                fecha=request.POST['fecha'],
+                hora=request.POST['hora'],
+                proyecto=None
             )
             if request.POST['proyecto'] != 'Ninguno':
                 r = Reporte.objects.last()
@@ -171,7 +169,8 @@ def crear_reporte(request):
                 r.save()
             messages.success(request, 'Reporte creado con exito.')
         except Exception as e:
-            messages.error(request, 'Hubo un error al crear el reporte: ' + str(e) + '.')
+            messages.error(
+                request, 'Hubo un error al crear el reporte: ' + str(e) + '.')
         return redirect('verReportes')
     else:
         nombre_usuario = request.user
@@ -187,7 +186,8 @@ def crear_reporte(request):
             'Proys': Proys
         }
         return render(request, 'asistencias/nuevo_reporte.html', data)
-    
+
+
 def editar_reporte(request):
     try:
         r = Reporte.objects.get(id=request.POST['id'])
@@ -198,5 +198,6 @@ def editar_reporte(request):
         r.save()
         messages.success(request, 'Reporte editado con exito.')
     except Exception as e:
-        messages.error(request, 'Hubo un error al editar el reporte: ' + str(e) + '.')
+        messages.error(
+            request, 'Hubo un error al editar el reporte: ' + str(e) + '.')
     return redirect('verReportes')

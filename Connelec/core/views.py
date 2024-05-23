@@ -44,45 +44,16 @@ def inicio(request):
 
 def iniciar_sesion(request):
     if request.method == 'POST':
-        # print(request.POST)
-        # form = AuthenticationForm(None, request.POST)
-        # if form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
-        # form.clean()
-        # user = form.get_user()
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('inicio')
         else:
             messages.error(request, 'Usuario o contraseña incorrectos.')
-        # else:
-            # messages.error(request, 'Ingresa datos válidos.')
-    # return render(request, 'core/login.html')
     form = AuthenticationForm()
     return render(request, 'core/login.html', {'form': form})
-
-# def iniciar_sesion(request):
-#     if request.method == 'POST':
-#         # print(request.POST)
-#         form = AuthenticationForm(None, request.POST)
-#         if form.is_valid():
-#             # username = request.POST['username']
-#             # password = request.POST['password']
-#             form.clean()
-#             user = form.get_user()
-#         # user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('inicio')
-#             else:
-#                 messages.error(request, 'Usuario o contraseña incorrectos.')
-#         else:
-#             messages.error(request, 'Ingresa datos válidos.')
-#     # return render(request, 'core/login.html')
-#     form = AuthenticationForm()
-#     return render(request, 'core/login.html', {'form': form})
 
 
 def editar_perfil(request):

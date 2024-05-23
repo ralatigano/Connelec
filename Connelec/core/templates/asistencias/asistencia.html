@@ -3,26 +3,30 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Menu asistencia {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
-    <div class="saludo">
-        <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
-    </div>
-    {% endblock %}
-    </header>
-    {% block content %}
-    <div class="botonera">
-        <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
-        <a href="hoy"><button type="button" class="btn btn-outline-dark">Hoy</button></a>
-        <a href="verPeriodo"><button type="button" class="btn btn-outline-dark">Ver periodo</button></a>
-        <a href="verAsistencias"><button type="button" class="btn btn-outline-dark">Ver registros</button></a>
-        <a href="reportes"><button type="button" class="btn btn-outline-dark">Reportes</button></a>
-        <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-    </div>
-    {% endblock %}
-</body>
+    <head>
+        <title>{% block title %} Menu asistencia {% endblock %}</title>
+    </head>
+    <body>
+        
+        {% block header %}
+        <div class="saludo">
+            <h1>Hola {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
+        </div>
+        {% endblock %}
+        
+        {% block content %}
+        <div class="botonera">
+            <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+            <a href="hoy"><button type="button" class="btn btn-outline-dark">Hoy</button></a>
+            <a href="verPeriodo"><button type="button" class="btn btn-outline-dark">Ver periodo</button></a>
+            <a href="verAsistencias"><button type="button" class="btn btn-outline-dark">Ver registros</button></a>
+            <a href="reportes"><button type="button" class="btn btn-outline-dark">Reportes</button></a>
+            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        </div>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>

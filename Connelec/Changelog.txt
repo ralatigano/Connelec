@@ -1,3 +1,22 @@
+--- 23/5/2024 ---
+
+********** Commit b8HNWcTQ *********
+General - templates - styles.css - .js
+*Se realiza un depurado general de código comentado residual de pruebas.
+*Se modifica el template "login" para que funcione apropiadamente ante la pérdida de foco del formulario. Se modifican algunos estilos para que la imagen de fondo
+se renderice apropiadamente.
+*Se corrige el nombre de un elemento en el template de "ver proyectos".
+*Se cambia la arquitectura de los templates y se ajustan algunos estilos de modo que los elementos estén mas ordenados y sean fácilmente identificables en la estructura.
+*Se cambia el criterio de separación de los ítems que se pasan al modal de modo que no interfiera con cualquier caracter que podría usarse en la información que se vuelca en ellos.
+*Se agrega la propiedad ColumnDefs y order en los .js de las tablas que requieren un orden para mostrar la información de modo que los datos mas actuales queden en la parte superior de la tabla.
+*Se corrigen configuraciones de estilo que entorpecían el correcto despliegue de la imagen de fondo y el desplazamiento de ciertos elementos extensos sobre ésta.
+
+App: asistencias
+*Se corrige un error ortográfico en la vista "hoy".
+
+App: clientes
+*Se corrige la vista "nuevo cliente" que no estaba mostrando el nombre de usuario en el navbar.
+
 --- 20/5/2024 ---
 
 ********** Commit fqGd6fuG *********

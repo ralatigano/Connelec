@@ -11,8 +11,6 @@ from .functions import *
 
 app_name = 'tareas'
 
-# desdeTareas = True
-
 # Create your views here.
 
 
@@ -28,21 +26,16 @@ def tareas(request):
 
 
 def ver_tareas(request):
-    # global desdeTareas
-    # desdeTareas = True
     usuario = User.objects.get(username=request.user).get_full_name()
     Tars = Tareas.objects.all().order_by('-fecha_creacion')
     data = {
         'usuario': usuario,
         'Tars': Tars,
-        # 'desdeTareas': desdeTareas
     }
     return render(request, 'tareas/ver_tareas.html', data)
 
 
 def ver_mis_tareas(request):
-    # global desdeTareas
-    # desdeTareas = True
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
         Tars = Tareas.objects.filter(
@@ -50,8 +43,6 @@ def ver_mis_tareas(request):
         data = {
             'usuario': usuario,
             'Tars': Tars,
-
-            # 'desdeTareas': desdeTareas
         }
     return render(request, 'tareas/ver_mis_tareas.html', data)
 
@@ -61,18 +52,14 @@ def crear_tarea(request):
     Usus = User.objects.all()
     Proys = Proyectos.objects.all()
     if request.method == 'POST':
-        # print(request.POST['proyecto'])
         try:
             Tareas.objects.create(
                 nombre=request.POST['nombre'],
                 descrip=request.POST['descripcion'],
                 fecha_entrega=None,
-                # fecha_entrega = request.POST['fecha_entrega'],
                 estado=request.POST['estado'],
                 proyecto=None,
-                # proyecto = Proyectos.objects.get(nombre=request.POST['proyecto']),
                 encargado=None
-                # encargado = User.objects.get(username='none')
             )
             if request.POST['fecha_entrega'] == 'dd/mm/aaaa':
                 tarea = Tareas.objects.last()
@@ -170,8 +157,6 @@ def editar_tarea(request):
 
 
 def tareas_asosc_proy(request, proy):
-    # global desdeTareas
-    # desdeTareas = False
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
     p = Proyectos.objects.get(nombre=proy).id
@@ -180,7 +165,6 @@ def tareas_asosc_proy(request, proy):
         'usuario': usuario,
         'Usus': Usus,
         'Tars': Tars,
-        # 'desdeTareas': desdeTareas
     }
     return render(request, 'tareas/tareas_asoc_proyecto.html', data)
 
@@ -222,7 +206,6 @@ def entradas_asosc_proy(request, proy):
 
 def crear_entrada(request, proy):
     if request.method == 'POST':
-        # print(proy)
         try:
             Entrada_historial.objects.create(
                 fecha=request.POST['fecha'],
@@ -250,5 +233,3 @@ def crear_entrada(request, proy):
             'Proys': Proys,
         }
         return render(request, 'tareas/crear_entrada.html', data)
-
-# Hubo un error al crear la entrada: NOT NULL constraint failed: tareas_entrada_historial.proyecto_id.

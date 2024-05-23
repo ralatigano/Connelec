@@ -10,7 +10,6 @@ class Proyectos(models.Model):
     descripcion = models.TextField(max_length=500, blank=True)
     n_expediente = models.CharField(
         max_length=200, blank=True, default=None, null=True)
-    # tareas = models.ManyToManyField("tareas.Tareas", blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
 

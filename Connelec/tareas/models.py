@@ -23,8 +23,6 @@ class Tareas(models.Model):
     fecha_entrega = models.DateField(default=None, blank=True, null=True)
     proyecto = models.ForeignKey(
         "proyectos.Proyectos", on_delete=models.CASCADE, default=None, blank=True, null=True)
-    # archivos = models.ManyToManyField("Archivos", blank=True)
-    # historial = models.ForeignKey("Historial", on_delete=models.CASCADE, default=None, null=True, blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
 

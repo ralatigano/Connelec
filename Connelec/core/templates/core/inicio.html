@@ -3,26 +3,26 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Inicio {% endblock %}</title>
-    {% block navbar %}
-    {% endblock %}
-</head>
-<body>
-    <header>
-    {% block header %}
-    <div class="saludo">
-        <h1 id="texto_saludo">Bienvenido {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
-    </div>
-    {% endblock %}
-    </header>
-    {% block content %}
-    <div class="botonera">
-        <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Proyectos</button></a>
-        <a href="/tareas"><button type="button" class="btn btn-outline-dark">Tareas</button></a>
-        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Asistencia</button></a>
-        <a href="/clientes"><button type="button" class="btn btn-outline-dark">Clientes</button></a>
-    </div>
-    {% endblock %}
-</body>
+    <head>
+        <title>{% block title %} Inicio {% endblock %}</title>
+        {% block navbar %}
+        {% endblock %}
+    </head>
+    <body>
+
+        {% block header %}
+        <div class="saludo">
+            <h1 id="texto_saludo">Bienvenido {{usuario}}</h1><img class="img-perfil" src="{{img}}" alt="Foto perfil">
+        </div>
+        {% endblock %}
+
+        {% block content %}
+        <div class="botonera">
+            <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Proyectos</button></a>
+            <a href="/tareas"><button type="button" class="btn btn-outline-dark">Tareas</button></a>
+            <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Asistencia</button></a>
+            <a href="/clientes"><button type="button" class="btn btn-outline-dark">Clientes</button></a>
+        </div>
+        {% endblock %}
+    </body>
 </html>
