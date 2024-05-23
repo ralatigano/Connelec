@@ -1,6 +1,7 @@
 --- 23/5/2024 ---
 
 ********** Commit b8HNWcTQ *********
+
 General - templates - styles.css - .js
 *Se realiza un depurado general de código comentado residual de pruebas.
 *Se modifica el template "login" para que funcione apropiadamente ante la pérdida de foco del formulario. Se modifican algunos estilos para que la imagen de fondo
