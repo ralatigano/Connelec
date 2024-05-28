@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib import messages
-from .models import User, registro, Reporte
 from datetime import datetime, date
 from .functions import *
 from proyectos.models import Proyectos
-
+from django.contrib.auth.decorators import login_required
+# cambio esto para probar un modelo de usuario con una opción OneToOneField con User
+from .models import registro, Reporte  # User,
+from django.contrib.auth.models import User
 
 app_name = 'asistencias'
 # Create your views here.
 
 
+@login_required
 def asistencia(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -22,6 +25,7 @@ def asistencia(request):
     return render(request, 'asistencias/asistencia.html', data)
 
 
+@login_required
 def hoy(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -44,6 +48,7 @@ def hoy(request):
     return render(request, 'asistencias/hoy.html', data)
 
 
+@login_required
 def ver_periodo(request):
     Usus = User.objects.all()
     username = request.user
@@ -77,6 +82,7 @@ def ver_periodo(request):
         return render(request, 'asistencias/ver_periodo.html', data)
 
 
+@login_required
 def marcar_asistencia(request):
     if request.method == 'POST':
         try:
@@ -120,6 +126,7 @@ def marcar_asistencia(request):
     return render(request, 'asistencias/marcar_asistencia.html', data)
 
 
+@login_required
 def listar_registros(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -131,6 +138,7 @@ def listar_registros(request):
     return render(request, 'asistencias/registros.html', data)
 
 
+@login_required
 def reportes(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -142,6 +150,7 @@ def reportes(request):
     return render(request, 'asistencias/reportes.html', data)
 
 
+@login_required
 def ver_reportes(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -153,6 +162,7 @@ def ver_reportes(request):
     return render(request, 'asistencias/ver_reportes.html', data)
 
 
+@login_required
 def crear_reporte(request):
     if request.method == 'POST':
         try:
@@ -188,6 +198,7 @@ def crear_reporte(request):
         return render(request, 'asistencias/nuevo_reporte.html', data)
 
 
+@login_required
 def editar_reporte(request):
     try:
         r = Reporte.objects.get(id=request.POST['id'])

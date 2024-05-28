@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
-from asistencias.models import User
 from clientes.models import Cliente
 from .models import Proyectos
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
+# cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
+from django.contrib.auth.models import User
+# from asistencias.models import User
 
 app_name = 'proyectos'
 
 
+@login_required
 def proyectos(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
-        img = User.objects.get(username=request.user).image.url
+        img = User.objects.get(username=request.user).usuario.image.url
         data = {
             'usuario': usuario,
             'img': img
@@ -19,6 +22,7 @@ def proyectos(request):
     return render(request, 'proyectos/proyectos.html', data)
 
 
+@login_required
 def ver_proyectos(request):
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
@@ -31,6 +35,7 @@ def ver_proyectos(request):
     return render(request, 'proyectos/ver_proyectos.html', data)
 
 
+@login_required
 def crear_proyecto(request):
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
@@ -56,6 +61,7 @@ def crear_proyecto(request):
     return render(request, 'proyectos/crear_proyecto.html', data)
 
 
+@login_required
 def editar_proyecto(request):
     try:
         p = Proyectos.objects.get(nombre=request.POST['nombre'])

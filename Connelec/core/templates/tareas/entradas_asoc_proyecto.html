@@ -23,27 +23,69 @@
                         <th class="centered">Archivo</th>
                         <th class="centered">Fecha de actualización</th>
                         <th class="centered">Actualizado por:</th>
+                        <th class="centered">Editar/Borrar</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody_Entradas">
                     {% for e in Entries %}
+                        {% with fecha_texto=e.fecha.date fecha_num=e.fecha.date|date:"Y-m-d" %}
                         <tr>
-                            <td>{{e.fecha.date}}</td>
+                            <td>
+                                {{fecha_texto}}
+                            </td>
                             <td>{{e.resumen}}</td>
                             <td>
                                 {% if e.adjunto %}
-                                    <a href="{{e.adjunto.url}}" download><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-download"></i></button></a>
+                                <a href="{{e.adjunto.url}}" download><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-download"></i></button></a>
                                 {% else %}
-                                    <p>Sin archivo</p>
+                                <p>Sin archivo</p>
                                 {% endif %}
                             </td>
                             <td>{{e.fecha_creacion}}</td>
-                            <td>{{e.usuario}}</td>                        
+                            <td>{{e.usuario}}</td>
+                            <td>
+                                <button type="button" class="btn btn-dark btn-xs btn-xs" data-bs-toggle="modal" data-bs-target="#editarEntradaModal" data-bs-whatever='{{e.id}}`{{proyecto}}`{{fecha_num}}`{{e.resumen}}'><i class="fa-solid fa-pencil sm"></i></button>
+                                <a href="/tareas/borrarEntrada/{{e.id}}" class="btn btn-dark btn-xs btnEliminacion"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>           
                         </tr>
+                        {% endwith %}
                     {% endfor %} 
                 </tbody>
             </table>
         </div>
+
+        <!-- Modal Editar Entrada -->
+        <div class="modal fade" id="editarEntradaModal" tabindex="-1" aria-labelledby="editarEntradaModalLabel" data-bs-backdrop="static" aria-hidden="true">   
+            <form action="/tareas/editarEntrada" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editarEntradaModal">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input id="id" name="id" hidden>
+                            
+                            <div class="form-group">
+                                <label for="fecha">Fecha:</label>
+                                <input type="date" id="fecha" name="fecha" format="%Y-%m-%d">
+                            </div>
+                            <div class="form-group">
+                                <label for="resumen">Información:</label>
+                                <textarea rows="4" cols="50" id = "resumen" name="resumen"></textarea>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</a></button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
 
         <!-- Custom Js -->
         <script src="{% static 'tareas/js/Entradas.js' %}"></script>

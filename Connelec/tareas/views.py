@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from asistencias.models import User
 from .models import Tareas, Archivos, Entrada_historial
 from django.contrib import messages
 from proyectos.models import Proyectos
@@ -7,17 +6,21 @@ from datetime import datetime
 from django.http import JsonResponse
 from django.core import serializers
 from .functions import *
-
+from django.contrib.auth.decorators import login_required
+# cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
+from django.contrib.auth.models import User
+# from asistencias.models import User
 
 app_name = 'tareas'
 
 # Create your views here.
 
 
+@login_required
 def tareas(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
-        img = User.objects.get(username=request.user).image.url
+        img = User.objects.get(username=request.user).usuario.image.url
         data = {
             'usuario': usuario,
             'img': img
@@ -25,6 +28,7 @@ def tareas(request):
     return render(request, 'tareas/tareas.html', data)
 
 
+@login_required
 def ver_tareas(request):
     usuario = User.objects.get(username=request.user).get_full_name()
     Tars = Tareas.objects.all().order_by('-fecha_creacion')
@@ -35,6 +39,7 @@ def ver_tareas(request):
     return render(request, 'tareas/ver_tareas.html', data)
 
 
+@login_required
 def ver_mis_tareas(request):
     if request.user.is_authenticated:
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -47,6 +52,7 @@ def ver_mis_tareas(request):
     return render(request, 'tareas/ver_mis_tareas.html', data)
 
 
+@login_required
 def crear_tarea(request):
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
@@ -102,6 +108,7 @@ def crear_tarea(request):
     return render(request, 'tareas/crear_tarea.html', data)
 
 
+@login_required
 def info_editar_tarea(request):
     Usus = User.objects.all()
     Proys = Proyectos.objects.all()
@@ -115,6 +122,7 @@ def info_editar_tarea(request):
     return JsonResponse(data)
 
 
+@login_required
 def editar_tarea(request):
     if request.method == 'POST':
         try:
@@ -156,6 +164,7 @@ def editar_tarea(request):
     return redirect('verTareas')
 
 
+@login_required
 def tareas_asosc_proy(request, proy):
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
@@ -169,6 +178,7 @@ def tareas_asosc_proy(request, proy):
     return render(request, 'tareas/tareas_asoc_proyecto.html', data)
 
 
+@login_required
 def explorar_tarea(request, nombTarea):
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
@@ -187,6 +197,7 @@ def explorar_tarea(request, nombTarea):
     return render(request, 'tareas/explorar.html', data)
 
 
+@login_required
 def entradas_asosc_proy(request, proy):
 
     usuario = User.objects.get(username=request.user).get_full_name()
@@ -204,6 +215,7 @@ def entradas_asosc_proy(request, proy):
     return render(request, 'tareas/entradas_asoc_proyecto.html', data)
 
 
+@login_required
 def crear_entrada(request, proy):
     if request.method == 'POST':
         try:
@@ -233,3 +245,33 @@ def crear_entrada(request, proy):
             'Proys': Proys,
         }
         return render(request, 'tareas/crear_entrada.html', data)
+
+
+def editar_entrada(request):
+    # print(f"El id de la entrada es: {request.POST['id']}")
+    try:
+        entrada = Entrada_historial.objects.get(id=request.POST['id'])
+        # print(f'El id del proyecto es: {entrada.proyecto}')
+        proyecto = entrada.proyecto
+        if request.POST['fecha'] != entrada.fecha.date():
+            entrada.fecha = request.POST['fecha']
+        if request.POST['resumen'] != entrada.resumen and request.POST['resumen'] != '':
+            entrada.resumen = request.POST['resumen']
+        entrada.save()
+        messages.success(request, "Entrada editada con exito.")
+    except Exception as e:
+        messages.error(
+            request, "Hubo un error al editar la entrada: " + str(e) + ".")
+    return redirect('entradasAsocProyecto', proyecto)
+
+
+def borrar_entrada(request, id):
+    try:
+        entrada = Entrada_historial.objects.get(id=id)
+        proyecto = entrada.proyecto
+        entrada.delete()
+        messages.success(request, "Entrada borrada con exito.")
+    except Exception as e:
+        messages.error(
+            request, "Hubo un error al borrar la entrada: " + str(e) + ".")
+    return redirect('entradasAsocProyecto', proyecto)

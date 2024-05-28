@@ -1,4 +1,6 @@
-from .models import registro, User
+# cambio esto para probar un modelo de usuario con una relación OneToOneField con User
+from .models import registro  # , User
+from django.contrib.auth.models import User
 from datetime import *
 from dateutil.rrule import *
 from dateutil.parser import *

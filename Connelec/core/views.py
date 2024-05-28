@@ -3,8 +3,11 @@ from .forms import UserRegisterForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from asistencias.models import User
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
+# cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
+from django.contrib.auth.models import User
+from asistencias.models import Usuario
 # Create your views here.
 
 
@@ -28,24 +31,27 @@ def registrarse(request):
         return render(request, 'core/registrarse.html', ctx)
 
 
+@login_required
 def inicio(request):
-    if request.user.is_authenticated:
-        usuario = User.objects.get(username=request.user).get_full_name()
-        try:
-            img = User.objects.get(username=request.user).image.url
-            data = {
-                'usuario': usuario,
-                'img': img
-            }
-        except:
-            data = {'usuario': usuario}
+    # if request.user.is_authenticated:
+    usuario = User.objects.get(username=request.user).get_full_name()
+    try:
+        img = User.objects.get(username=request.user).usuario.image.url
+        data = {
+            'usuario': usuario,
+            'img': img
+        }
+    except:
+        data = {'usuario': usuario}
     return render(request, 'core/inicio.html', data)
 
 
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['username']
+        print(username)
         password = request.POST['password']
+        print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
@@ -56,6 +62,7 @@ def iniciar_sesion(request):
     return render(request, 'core/login.html', {'form': form})
 
 
+@login_required
 def editar_perfil(request):
     if request.method == 'POST':
         username = request.user
@@ -65,10 +72,11 @@ def editar_perfil(request):
                 info_usuario.first_name = request.POST['nombre']
             if request.POST['apellido'] != info_usuario.last_name:
                 info_usuario.last_name = request.POST['apellido']
-            if request.POST['fecha_nac'] != info_usuario.birthday:
-                info_usuario.birthday = request.POST['fecha_nac']
+            if request.POST['fecha_nac'] != info_usuario.usuario.birthday:
+                info_usuario.usuario.birthday = request.POST['fecha_nac']
             if request.FILES:
-                info_usuario.image = request.FILES['imagen_nueva']
+                info_usuario.usuario.image = request.FILES['imagen_nueva']
+            info_usuario.usuario.save()
             info_usuario.save()
             messages.success(request, 'Información actualizada correctamente.')
         except Exception as e:
@@ -81,9 +89,9 @@ def editar_perfil(request):
         first_name = User.objects.get(username=username).first_name
         last_name = User.objects.get(username=username).last_name
         birthday = datetime.strftime(User.objects.get(
-            username=username).birthday, '%Y-%m-%d')
+            username=username).usuario.birthday, '%Y-%m-%d')
         try:
-            img = User.objects.get(username=request.user).image.url
+            img = User.objects.get(username=request.user).usuario.image.url
         except:
             img = ''
         data = {
@@ -96,6 +104,7 @@ def editar_perfil(request):
         return render(request, 'core/perfil.html', data)
 
 
+@login_required
 def cambiar_contrasena(request):
     if request.method == 'POST':
         if request.POST['contrasena1'] == request.POST['contrasena2'] and len(request.POST['contrasena1']) >= 8:
@@ -110,7 +119,7 @@ def cambiar_contrasena(request):
             return redirect('cambiarContrasena')
     else:
         usuario = User.objects.get(username=request.user).get_full_name()
-        img = User.objects.get(username=request.user).image.url
+        img = User.objects.get(username=request.user).usuario.image.url
         data = {
             'usuario': usuario,
             'img': img

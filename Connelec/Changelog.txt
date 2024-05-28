@@ -1,3 +1,19 @@
+--- 28/5/2024 ---
+
+********** Commit v5tZ2Uh8 *********
+
+General views
+*Se incorporan cambios para garantizar que solo un usuario logueado pueda navegar en la app.
+
+App: asistencias
+*Se modifica el modelo de usuario que se había utilizado en un principio por otro que es una extensión del modelo nativo para
+recuperar funcionalidad en cuanto usuarios, grupos y premisos. Esto implica cambios en las demas aplicaciones para que se ajusten
+a la nueva estructura.
+
+App: tareas
+*Se registra correctamente el model de entrada_historial de modo que funcione correctamente en el panel de administración.
+*Se agrega la funcionalidad para poder editar y borrar entradas de los históricos de los proyectos.
+
 --- 23/5/2024 ---
 
 ********** Commit b8HNWcTQ *********
