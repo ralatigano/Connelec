@@ -3,12 +3,13 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Hoy {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
+    <head>
+        <title>{% block title %} Hoy {% endblock %}</title>
+    </head>
+    <body>
+
+        {% block header %}
+        <h1>Hola {{usuario}}</h1>
         {% if messages%}
             {% for message in messages %}
                 <div>
@@ -16,17 +17,20 @@
                 </div>
             {% endfor %}
         {% endif %}
-    {% endblock %}
-    </header>
-    {% block content %}
+        {% endblock %}
+
+        {% block content %}
         <div class="container">
-            <h1>Hola {{usuario}}</h1>
             <h2>{{mensaje}}</h2>
-            <div>
-                <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-                <a href="/asistencias/marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
-            </div>
+
         </div>
-    {% endblock %}
-</body>
+        {% endblock %}
+
+        {% block footer %}
+        <div>
+            <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="/asistencias/marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+        </div>
+        {% endblock %}
+    </body>
 </html>

@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.template.loader import get_template
-from asistencias.models import User
 from .models import Tareas
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
+# cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
+from django.contrib.auth.models import User
+# from asistencias.models import User
 
 
 def notificar_encargado(tarea_id, usuario):
@@ -11,7 +13,6 @@ def notificar_encargado(tarea_id, usuario):
     tarea = Tareas.objects.get(id=tarea_id)
     correo_encargado = User.objects.get(username=tarea.encargado).email
     url_tarea = f'https://{settings.ALLOWED_HOSTS[0]}/tareas/explorarTarea/{tarea.nombre}'
-    # url_tarea = f'http://{settings.ALLOWED_HOSTS[2]}:8000/tareas/explorarTarea/{tarea.nombre}'
     template = get_template('tareas/tarea_correo.html')
     data = {
         'usuario': usuario,

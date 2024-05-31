@@ -3,60 +3,62 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Nuevo reporte {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
+    <head>
+        <title>{% block title %} Nuevo reporte {% endblock %}</title>
+    </head>
+    <body>
 
-    {% endblock %}
-    </header>
-    {% block content %}
-    <div class="container">
-        <h1>Crear nuevo reporte</h1>
-    </div>
-    <div class="botonera">
-        <div>
-            <form action="crearReporte" method="post" class="formulario" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="usuario" style="font-weight: bold">Usuario:</label>
-                    <br>
-                    <input type="text" id="usuario" name="usuario" value="{{nombre_usuario}}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="fecha">Fecha:</label>
-                    <br>
-                    <input type="date" id="fecha" name="fecha" format="%Y-%m-%d" value="{{fecha}}">
-                </div>
-                <div class="form-group hora">
-                    <label for="hora" style="font-weight: bold">Hora</label>
-                    <br>
-                    <input type="time" id="hora" name="hora" value="{{hora}}">
-                </div>
-                <div class="form-group">
-                    <label for="informe" style="font-weight: bold">Detalle tareas realizadas:</label>
-                    <br>
-                    <textarea rows="5" cols="50" id = "informe" name="informe"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="proyecto" style="font-weight: bold">Proyecto:</label>
-                    <select name="proyecto" id="proyecto">
-                        <option value="Ninguno">Ninguno</option>
-                        {% for p in Proys %}
-                            {% if p.nombre != proyecto %}
-                            <option value="{{p.nombre}}">{{p.nombre}}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                
-                <button type="submit" id="submit" class="btn btn-outline-dark">Guardar reporte</button>
-            </form>
+        {% block header %}
+        <div class="container">
+            <h1>Crear nuevo reporte</h1>
         </div>
-        <a href="/asistencias/verReportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-    </div>
-    {% endblock %}
-</body>
+        {% endblock %}
+
+        {% block content %}
+        <div class="botonera">
+            <div>
+                <form action="crearReporte" method="post" class="formulario" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="usuario" style="font-weight: bold">Usuario:</label>
+                        <br>
+                        <input type="text" id="usuario" name="usuario" value="{{nombre_usuario}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <br>
+                        <input type="date" id="fecha" name="fecha" format="%Y-%m-%d" value="{{fecha}}">
+                    </div>
+                    <div class="form-group hora">
+                        <label for="hora" style="font-weight: bold">Hora</label>
+                        <br>
+                        <input type="time" id="hora" name="hora" value="{{hora}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="informe" style="font-weight: bold">Detalle tareas realizadas:</label>
+                        <br>
+                        <textarea rows="5" cols="50" id = "informe" name="informe"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="proyecto" style="font-weight: bold">Proyecto:</label>
+                        <select name="proyecto" id="proyecto">
+                            <option value="Ninguno">Ninguno</option>
+                            {% for p in Proys %}
+                                {% if p.nombre != proyecto %}
+                                <option value="{{p.nombre}}">{{p.nombre}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-outline-dark">Guardar reporte</button>
+                </form>
+            </div>
+            <a href="/asistencias/verReportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        </div>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>

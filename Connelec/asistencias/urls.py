@@ -1,19 +1,27 @@
 
 from django.urls import path
 from .views import (
-                    asistencia, marcar_asistencia, hoy, listar_registros,
-                    ver_periodo, reportes, ver_reportes, crear_reporte,
-                    editar_reporte
+    asistencia, hoy, ver_periodo,
+    marcar_asistencia, listar_registros, editar_registro, borrar_registro,
+    reportes, crear_reporte, ver_reportes, editar_reporte, borrar_reporte
 )
 
 urlpatterns = [
+    # Menu asistencias
     path('', asistencia, name='asistencias'),
-    path('marcarAsistencia', marcar_asistencia, name='marcarAsistencia'),
+    # Vistas para calcular horas trabajadas en determinados periodos de tiempo según las asistencias registradas
     path('hoy', hoy, name='hoy'),
-    path('verAsistencias', listar_registros, name='verAsistencias'),
     path('verPeriodo', ver_periodo, name='verPeriodo'),
+    # CRUD Registros
+    path('verAsistencias', listar_registros, name='verAsistencias'),
+    path('marcarAsistencia', marcar_asistencia, name='marcarAsistencia'),
+    path('editarRegistro', editar_registro, name='editarRegistro'),
+    path('borrarRegistro/<int:id>', borrar_registro, name='borrarRegistro'),
+    # Menu reportes
     path('reportes', reportes, name='reportes'),
+    # CRUD Reportes
     path('verReportes', ver_reportes, name='verReportes'),
     path('crearReporte', crear_reporte, name='crearReporte'),
     path('editarReporte', editar_reporte, name='editarReporte'),
+    path('borrarReporte/<int:id>', borrar_reporte, name='borrarReporte'),
 ]

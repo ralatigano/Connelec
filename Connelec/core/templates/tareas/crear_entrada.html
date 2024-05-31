@@ -3,51 +3,53 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block title %} Nueva entrada {% endblock %}</title>
-</head>
-<body>
-    <header>
-    {% block header %}
+    <head>
+        <title>{% block title %} Nueva entrada {% endblock %}</title>
+    </head>
+    <body>
 
-    {% endblock %}
-    </header>
-    {% block content %}
-    <h1>Crear nueva entrada en proyecto: {{proyecto}}</h1>
-    
-    <div class="botonera">
-        <div>
-            <form action="crearEntrada" method="post" class="formulario" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" format="%Y-%m-%d">
-                </div>
-                <div class="form-group">
-                    <label for="resumen">Información:</label>
-                    <textarea rows="4" cols="50" id = "resumen" name="resumen"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="proyecto">Proyecto:</label>
-                    <select name="proyecto" id="proyecto">
-                        <option value="{{proyecto}}">{{proyecto}}</option>
-                        {% for p in Proys %}
-                            {% if p.nombre != proyecto %}
-                            <option value="{{p.nombre}}">{{p.nombre}}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="adjunto">Archivo:</label>
-                    <input type="file" name="adjunto" id="adjunto" multiple placeholder="Suba un archivo si corresponde.">
-                </div>
-                <button type="submit" id="submit" class="btn btn-outline-dark">Crear entrada</button>
-            </form>
+        {% block header %}
+        <h1>Crear nueva entrada en proyecto: {{proyecto}}</h1>
+        {% endblock %}
+
+        {% block content %}
+        <div class="botonera">
+            <div>
+                <form action="crearEntrada" method="post" class="formulario" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" id="fecha" name="fecha" format="%Y-%m-%d">
+                    </div>
+                    <div class="form-group">
+                        <label for="resumen">Información:</label>
+                        <textarea rows="4" cols="50" id = "resumen" name="resumen"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="proyecto">Proyecto:</label>
+                        <select name="proyecto" id="proyecto">
+                            <option value="{{proyecto}}">{{proyecto}}</option>
+                            {% for p in Proys %}
+                                {% if p.nombre != proyecto %}
+                                <option value="{{p.nombre}}">{{p.nombre}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adjunto">Archivo:</label>
+                        <input type="file" name="adjunto" id="adjunto" multiple placeholder="Suba un archivo si corresponde.">
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-outline-dark">Crear entrada</button>
+                </form>
+            </div>
+            <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-    </div>
-    {% endblock %}
-</body>
+        {% endblock %}
+
+        {% block footer %}
+
+        {% endblock %}
+    </body>
 </html>
