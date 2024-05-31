@@ -1,3 +1,0 @@
-id,password,last_login,is_superuser,username,last_name,email,is_staff,is_active,date_joined,first_name
-1,pbkdf2_sha256$720000$U5YDSalcTfPLcCZmV7cC07$0SMJzrHQkeoaNKy6s9JMNSQkKHPP2KViEjjqPbICykw=,2024-05-28 19:54:25,1,rlatigano,Latigano,rlatigano@connelec.com.ar,1,1,2024-05-28 19:19:43,Ramiro
-2,pbkdf2_sha256$720000$tgxGiFXVAzKnHDVW36tCo8$xI+MBdfA2Qw3q0JQnbpw/W6+Q/Dvy3uMwiZLTK6iLKg=,2024-05-28 19:25:50,0,egarcia,Garcia,egarcia@connelec.com.ar,0,1,2024-05-28 19:24:00,Enrique

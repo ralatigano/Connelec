@@ -8,6 +8,9 @@
 16) Investigar como hacer para que al actualizar el repositorio no exista conflictos entre las bases de datos que siempre van a ser diferentes porque durante el proceso de
 depuración podrían ocurrir cambios en la DDBB online mientras que la DDBB "local" puede ser alterada por pruebas. (Hecho)
 17) El botón volver atras de la vista de nueva entrada debería volver a la tabla de entradas del proyecto, no a la vista de ver proyectos.
+18) Hay problemas con la base de datos y la tabla de reportes. Por alguna razón los reportes nuevos no se crean con un atributo ID y a partir de entonces
+no son alcanzables para nada mas, no se los puede borrar ni modificar. Sin embargo si que se crean y guardan... (Corregido)
+19) Habría que verificar la funcionalidad de "hoy". Por ejemplo en el caso de que el usuario haya marcado una salida y después quiera consultar.
 
 **Mejoras
 
@@ -27,3 +30,4 @@ eventualmente, al ejecutarse ciertas lógicas que impliquen cambios en el proyec
 11) Cuando creo una tarea desde la vista "tareas asociadas a proyecto" sería bueno que ya tenga asignado el proyecto en cuestión.
 12) Que la sesión se cierre después de cierto tiempo de inactividad.
 13) ¿Se puede incorporar algún plugin o algo que funcione para chequear la ortografía de algo que se este escribiendo en tiempo real?
+14) Investigar sobre la funcionalidad que permite corregir los inputs en formularios en tiempo real.
