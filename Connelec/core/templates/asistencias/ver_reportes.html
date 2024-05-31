@@ -10,7 +10,10 @@
         {% block header %}
         <h1>Lista de reportes</h1>
         <br>
-        <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+        <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if crear %}
+        <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+        {% endif %}
         {% endblock %}
 
         {% block content %}
@@ -24,29 +27,43 @@
                             <th class="centered">Informe</th>
                             <th class="centered">Proyecto</th>
                             <th class="centered">Fecha y hora</th>
+                            <th class="centered">Editar/Borrar</th>
                         </tr>
                     </thead>
                     <tbody id="tabla_reportes">
                         {% for r in reportes %}
+                        {% with fecha_num=r.fecha|date:"Y-m-d" %}
                             <tr>
                                 <td>{{r.id}}</td>
                                 <td>{{r.usuario}}</td>
                                 <td>{{r.informe}}</td>
                                 <td>
-                                    {% if r.proyecto == None %}
-                                        <p>Ninguno</p>
-                                    {% else %}
+                                    {% if r.proyecto != None %}
                                         {{r.proyecto}}
+                                    {% else %}
+                                        <p>Ninguno</p>
                                     {% endif %}
-                                    <button type="button" id="editarReporte" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarReporteModal" data-bs-whatever="{{r.id}}" onclick="showEditarReporteModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
                                 </td>
                                 <td>{{r.fecha}} {{r.hora}}</td>
+                                <td>
+                                    {% if editar %}
+                                    <button type="button" id="editarReporte" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarReporteModal" data-bs-whatever="{{r.id}}`{{r.informe}}`{{r.proyecto}}`{{fecha_num}}`{{r.hora}}`{{request.user}}`{{r.usuario}}" onclick="showEditarReporteModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
+                                    {% else %}
+                                    <button type="button" id="editarReporte" class="btn btn-dark btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
+                                    {% endif %}
+                                    {% if borrar %}
+                                    <a href="#" class="btn btn-dark btn-xs btnEliminacion" data-bs-whatever="{{request.user}}`{{r.usuario}}"><i class="fa-solid fa-trash-can"></i></a>
+                                    <!-- <a href="/asistencias/borrarReporte/{{r.id}}" class="btn btn-dark btn-xs btnEliminacion" data-bs-whatever="{{request.user}}`{{r.usuario}}"><i class="fa-solid fa-trash-can"></i></a> -->
+                                    {% else %}
+                                    <button type="button" id="borrarReporte" class="btn btn-dark btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
+                                    {% endif %}
+                                </td>
                             </tr>
+                        {% endwith %}
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
         </div>
         
         <!-- Modal Editar Reporte -->
@@ -56,22 +73,36 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="editarProyectoModal">Asociar el reporte a un proyecto:</h1>
+                            <h1 class="modal-title fs-5" id="editarReporteModal">Modal title:</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <input id="id" name="id" hidden>
-
+                            <div class="form-group">
+                                <label for="informe" style="font-weight: bold">Detalle tareas realizadas:</label>
+                                <br>
+                                <textarea rows="5" cols="50" id = "informe" name="informe"></textarea>
+                            </div>
                             <div class="form-group">
                                 <label for="proyecto">Proyecto:</label>
                                 <select name="proyecto" id="proyecto">
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label for="fecha">Fecha:</label>
+                                <br>
+                                <input type="date" id="fecha" name="fecha" format="%Y-%m-%d">
+                            </div>
+                            <div class="form-group hora">
+                                <label for="hora" style="font-weight: bold">Hora</label>
+                                <br>
+                                <input type="time" id="hora" name="hora">
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</a></button> 
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-dark">Guardar</a></button> 
                         </div>
                     </div>
                 </div>
@@ -83,7 +114,10 @@
         {% endblock %}
 
         {% block footer %}
-
+        <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if crear %}
+        <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+        {% endif %}
         {% endblock %}
     </body>
 </html>

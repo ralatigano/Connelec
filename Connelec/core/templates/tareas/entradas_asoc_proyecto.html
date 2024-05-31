@@ -10,7 +10,10 @@
         {% block header %}
         <h1>Histórico proyecto: {{proyecto}}</h1>
         <h6>Número de expediente: {{n_expediente}}</h6>
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if autorizado %}
+        <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+        {% endif %}
         {% endblock %}
 
         {% block content %}
@@ -44,8 +47,13 @@
                             <td>{{e.fecha_creacion}}</td>
                             <td>{{e.usuario}}</td>
                             <td>
+                                {% if autorizado %}
                                 <button type="button" class="btn btn-dark btn-xs btn-xs" data-bs-toggle="modal" data-bs-target="#editarEntradaModal" data-bs-whatever='{{e.id}}`{{proyecto}}`{{fecha_num}}`{{e.resumen}}'><i class="fa-solid fa-pencil sm"></i></button>
                                 <a href="/tareas/borrarEntrada/{{e.id}}" class="btn btn-dark btn-xs btnEliminacion"><i class="fa-solid fa-trash-can"></i></a>
+                                {% else %}
+                                <button type="button" class="btn btn-dark btn-xs btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
+                                <button type="button" class="btn btn-dark btn-xs btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>                                
+                                {% endif %}
                             </td>           
                         </tr>
                         {% endwith %}

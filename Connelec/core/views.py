@@ -49,9 +49,7 @@ def inicio(request):
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['username']
-        print(username)
         password = request.POST['password']
-        print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)

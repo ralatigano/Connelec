@@ -9,7 +9,10 @@
     <body>
         {% block header %}
         <h1>Lista de asistencias</h1>
-        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if crear %}
+        <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+        {% endif %}
         {% endblock %}
         
         {% block content %}
@@ -22,30 +25,89 @@
                             <th class="centered">Nombre</th>
                             <th class="centered">Tipo</th>
                             <th class="centered">Fecha y hora</th>
+                            <th class="centered">Editar/Borrar</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody_registros">
                         {% for r in registros %}
-                        
+                        {% with fecha_num=r.fecha|date:"Y-m-d" %}
                             <tr>
                                 <td>{{r.id}}</td>
                                 <td>{{r.nombre_completo}}</td>
                                 <td>{{r.tipo}}</td>
                                 <td>{{r.fecha}} {{r.hora}}</td>
+                                <td>
+                                    {% if editar %}
+                                        <button type="button" class="btn btn-dark btn-xs btn-xs" data-bs-toggle="modal" data-bs-target="#editarRegistroModal" data-bs-whatever='{{r.id}}`{{r.nombre_completo}}`{{fecha_num}}`{{r.hora}}`{{r.tipo}}`{{request.user}}`{{r.usuario}}'><i class="fa-solid fa-pencil sm"></i></button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-dark btn-xs btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
+                                    {% endif %}
+                                    {% if borrar %}
+                                        <a href="/asistencias/borrarRegistro/{{r.id}}" class="btn btn-dark btn-xs btnEliminacion" data-bs-whatever="{{request.user}}`{{r.usuario}}" onclick="mostrarValores()"><i class="fa-solid fa-trash-can"></i></a>
+                                    {% else %}
+                                        <button type="button" class="btn btn-dark btn-xs btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
+                                    {% endif %}
+                                </td>
                             </tr>
-                        
+                        {% endwith %}
                         {% endfor %}
 
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <!-- Modal Editar Registro -->
+        <div class="modal fade" id="editarRegistroModal" tabindex="-1" aria-labelledby="editarRegistroModalLabel" data-bs-backdrop="static" aria-hidden="true">   
+            <form action="/asistencias/editarRegistro" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editarRegistroModal">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input id="id" name="id" hidden>
+                            
+                            <div class="form-group">
+                                <label for="fecha">Fecha:</label>
+                                <br>
+                                <input type="date" id="fecha" name="fecha" format="%Y-%m-%d">
+                            </div>
+                            <div class="form-group hora">
+                                <label for="hora" style="font-weight: bold">Hora</label>
+                                <br>
+                                <input type="time" id="hora" name="hora">
+                            </div>
+                            <div class="form-group tipo">
+                                <label for="tipo" style="font-weight: bold">Entrada/Salida</label>
+                                <br>
+                                <select name="tipo" id="tipo" class="form-control select">
+                                    <option value="Salida">Salida</option>
+                                    <option value="Entrada">Entrada</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-dark">Guardar cambios</a></button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <!-- Custom Js -->
         <script src="{% static 'asistencias/js/registros.js' %}"></script>
         {% endblock %}
         
         {% block footer %}
-        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if crear %}
+        <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+        {% endif %}
         {% endblock %}
     </body>
 </html>

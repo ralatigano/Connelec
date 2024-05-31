@@ -2,7 +2,7 @@ from django.contrib import admin
 # cambio esto para probar un modelo de usuario con una relación OneToOneField con User
 # from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import registro, Reporte, Usuario  # User,
+from .models import registro, Reporte_tarea, Usuario  # User,
 from django.contrib.auth.models import User
 
 
@@ -44,6 +44,7 @@ admin.site.register(User, UserAdmin)
 
 class ReporteAdmin(admin.ModelAdmin):
     list_display = ('id', 'usuario', 'fecha', 'hora', 'informe')
+    list_filter = ('usuario', 'fecha', 'proyecto')
 
 
-admin.site.register(Reporte, ReporteAdmin)
+admin.site.register(Reporte_tarea, ReporteAdmin)

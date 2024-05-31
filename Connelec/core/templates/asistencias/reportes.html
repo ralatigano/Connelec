@@ -16,7 +16,9 @@
 
         {% block content %}
         <div class="botonera">
+            {% if crear %}
             <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+            {% endif %}
             <a href="verReportes"><button type="button" class="btn btn-outline-dark">Ver reportes</button></a>
             <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} Error {% endblock %}</title>
+    </head>
+    <body>
+        {% block header %}
+        <h1>¡Ups! Algo salió mal</h1>
+        {% endblock %}
+
+        {% block content %}
+            <p>No tienes permisos para realizar la acción que estas intentando.</p>
+        {% endblock %}
+
+        {% block footer %}
+        <a href="#"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+        <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver al inicio</button></a>
+        {% endblock %}
+    </body>
+</html>

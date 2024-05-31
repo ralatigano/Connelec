@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser, Group
+# from django.contrib.auth.models import User, AbstractUser, Group
 from django.conf import settings
 from proyectos.models import Proyectos
 import uuid
@@ -95,11 +95,8 @@ def create_usuario(sender, instance, created, **kwargs):
         Usuario.objects.create(user=instance)
 
 
-class Reporte(models.Model):
-    # cambio esto para probar un modelo de usuario con una relación OneToOneField con User
-    usuario = models.ForeignKey(
-        User, on_delete=models.CASCADE)  # usuario = models.ForeignKey(
-    # settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class Reporte_tarea(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateField()
     hora = models.TimeField()
     proyecto = models.ForeignKey(

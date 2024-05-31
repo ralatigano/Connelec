@@ -10,7 +10,10 @@
         {% block header %}
         <h1>Clientes</h1>
         <br>
-        <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
+        <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if autorizado %}
+        <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
+        {% endif %}
         {% endblock %}
 
         {% block content %}
@@ -25,7 +28,7 @@
                         <th class="centered">E-mail</th>
                         <th class="centered">Dirección</th>
                         <th class="centered">Provincia</th>
-                        <th class="centered">Editar información</th>
+                        <th class="centered">Editar/Borrar</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody_Clientes">
@@ -39,7 +42,13 @@
                             <td><a href="https://www.google.com/maps/search/?api=1&query={{c.direccion_google}}" target="_blank" rel="noopener noreferrer">{{c.direccion}}</a></td>
                             <td>{{c.provincia}}</td>
                             <td>
+                                {% if autorizado %}
                                 <button type="button" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarClienteModal" data-bs-whatever="{{c.nombre}}`{{c.razon_social}}`{{c.cuit}}`{{c.telefono}}`{{c.email}}`{{c.direccion}}`{{c.provincia}}"><i class="fa-solid fa-pencil sm"></i></button>
+                                <a href="borrarCliente/{{c.id}}" class="btn btn-dark btn-xs btnEliminacion"><i class="fa-solid fa-trash-can"></i></a>
+                                {% else %}
+                                <button type="button" class="btn btn-dark btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
+                                <button type="button" class="btn btn-dark btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %} 
@@ -114,8 +123,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</a></button> 
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-dark">Guardar cambios</a></button> 
                         </div>
                     </div>
                 </div>
@@ -126,7 +135,10 @@
         {% endblock %}
 
         {% block footer %}
-        <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
+        <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
+        {% if autorizado %}
+        <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
+        {% endif %}
         {% endblock %}
     </body>
 </html>

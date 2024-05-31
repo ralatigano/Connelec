@@ -1,3 +1,30 @@
+--- 31/5/2024 ---
+
+********** Commit Y8zpR8Jj *********
+
+General
+*Se corrigen algunos errores que se encuentran durante el desarrollo.
+*Se corrigen desperfectos en la base de datos que surgieron a partir de la modificación del modelo de usuario.
+*Se ordena mediante comentarios las urls del proyecto.
+*Se empieza a documentar algunas vistas.
+
+App: asistencias
+*Se agrega la funcionalidad de editar y borrar registros de asistencias considerando los permisos de cada usuario.
+*Se agrega la funcionalidad de editar y borrar reportes de tareas considerando los permisos de cada usuario.
+--Se decide implementar el criterio de que en general los usuarios pueden modificar aquellos registros que fueron creados
+por ellos, pero no los que fueron creados por otros usuarios.
+*En el afan de corregir un error que se descubrió durante el desarrollo se cambia el modelo de reporte de tareas.
+
+App: clientes
+*Se agrega la funcionalidad de editar y borrar registros de clientes considerando la nueva estructura de permisos.
+
+App: proyectos
+*Se agrega la funcionalidad de editar y borrar registros de proyectos considerando la nueva estructura de permisos.
+
+App: tareas
+*Se agrega la funcionalidad de editar y borrar registros de tareas considerando la nueva estructura de permisos.
+*Se agrega la funcionalidad de editar y borrar registros de entradas de historial considerando la nueva estructura de permisos.
+
 --- 28/5/2024 ---
 
 ********** Commit v5tZ2Uh8 *********

@@ -29,6 +29,8 @@ class Tareas(models.Model):
         "proyectos.Proyectos", on_delete=models.CASCADE, default=None, blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='created_models')
 
     def __str__(self):
         return self.nombre
