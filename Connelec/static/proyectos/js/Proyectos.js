@@ -27,7 +27,6 @@ const initDataTable=async() => {
 
 window.addEventListener("load", async() => {
     await initDataTable();
-    //document.getElementById("nav_item_clientes").style.fontWeight = "bold";
 });
 
 
@@ -36,10 +35,14 @@ editarProyectoModal.addEventListener('show.bs.modal', async event => {
   //botón que lanza el modal
   const button = event.relatedTarget
   //obtengo el código del producto y su nombre para mostrarlo en el modal
-  const nombre = button.getAttribute('data-bs-whatever')
+  const recipient = button.getAttribute('data-bs-whatever')
+  var partes = recipient.split('`');
 
+  const nombre = partes[0];
+  const n_expediente= partes[1];
 
   $("#nombre").val(nombre);
+  $("#n_expediente").val(n_expediente);
   
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

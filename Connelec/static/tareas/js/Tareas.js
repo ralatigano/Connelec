@@ -20,18 +20,17 @@ const initDataTable=async() => {
                 next: 'Siguiente',
                 previous: 'Anterior'
             }
-        }
+        },
+        columnDefs: [ { targets: 6, type: 'date' } ],
+        order: [[ 6, "desc" ]]
     });
     dataTableIsInitilized=true;
 }
 
 window.addEventListener("load", async() => {
     await initDataTable();
-    //document.getElementById("nav_item_clientes").style.fontWeight = "bold";
 });
 
-
-//"{{t.nombre}}|{{c.descrip}}|{{c.encargado}}|{{t.estado}}|{{t.fecha_entrega}}|{{t.proyecto}}"
 const editarTareaModal = document.getElementById('editarTareaModal')
 editarTareaModal.addEventListener('show.bs.modal', async event => {
   //botón que lanza el modal
@@ -39,7 +38,7 @@ editarTareaModal.addEventListener('show.bs.modal', async event => {
   //obtengo el código del producto y su nombre para mostrarlo en el modal
   const recipient = button.getAttribute('data-bs-whatever')
   console.log(recipient);
-  var partes = recipient.split('|');
+  var partes = recipient.split('`');
 
   const nombre = partes[0];
   const descrip= partes[1];
@@ -47,7 +46,6 @@ editarTareaModal.addEventListener('show.bs.modal', async event => {
   const estado = partes[3];
   const f_entrega = partes[4];
   const proyecto = partes[5];
-  //const provincia = partes[6];
 
   //cambio el texto del título del modal
   const modalTitle = editarTareaModal.querySelector('.modal-title')
@@ -55,10 +53,8 @@ editarTareaModal.addEventListener('show.bs.modal', async event => {
 
   $("#nombre").val(nombre);
   $("#descrip").val(descrip);
-  //$("#encargado").val(encargado);
   $("#estado").val(estado);
   $("#fecha_entrega").val(f_entrega);
-  //$("#proyecto").val(proyecto);
   
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -71,7 +67,6 @@ async function showEditarTareaModal(button){
     try{
         var response = await fetch(`/tareas/infoEditarTarea`);
         var data = await response.json();
-        //console.log(data);
         
         var cardContentUsus = `
             <option value="Ninguno">Ninguno</option>
