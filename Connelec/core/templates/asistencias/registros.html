@@ -38,14 +38,14 @@
                                 <td>{{r.fecha}} {{r.hora}}</td>
                                 <td>
                                     {% if editar %}
-                                        <button type="button" class="btn btn-dark btn-xs btn-xs" data-bs-toggle="modal" data-bs-target="#editarRegistroModal" data-bs-whatever='{{r.id}}`{{r.nombre_completo}}`{{fecha_num}}`{{r.hora}}`{{r.tipo}}`{{request.user}}`{{r.usuario}}'><i class="fa-solid fa-pencil sm"></i></button>
+                                        <button type="button" class="btn btn-outline-dark btn-xs btn-xs" data-bs-toggle="modal" data-bs-target="#editarRegistroModal" data-bs-whatever='{{r.id}}`{{r.nombre_completo}}`{{fecha_num}}`{{r.hora}}`{{r.tipo}}`{{request.user}}`{{r.usuario}}'><i class="fa-solid fa-pencil sm"></i></button>
                                     {% else %}
-                                        <button type="button" class="btn btn-dark btn-xs btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
+                                        <button type="button" class="btn btn-outline-dark btn-xs btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
                                     {% endif %}
                                     {% if borrar %}
-                                        <a href="/asistencias/borrarRegistro/{{r.id}}" class="btn btn-dark btn-xs btnEliminacion" data-bs-whatever="{{request.user}}`{{r.usuario}}" onclick="mostrarValores()"><i class="fa-solid fa-trash-can"></i></a>
+                                        <a href="/asistencias/borrarRegistro/{{r.id}}" class="btn btn-outline-dark btn-xs btnEliminacion" data-bs-whatever="{{request.user}}`{{r.usuario}}" onclick="mostrarValores()"><i class="fa-solid fa-trash-can"></i></a>
                                     {% else %}
-                                        <button type="button" class="btn btn-dark btn-xs btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
+                                        <button type="button" class="btn btn-outline-dark btn-xs btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -91,8 +91,8 @@
                             
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-dark">Guardar cambios</a></button> 
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-dark">Guardar cambios</a></button> 
                         </div>
                     </div>
                 </div>

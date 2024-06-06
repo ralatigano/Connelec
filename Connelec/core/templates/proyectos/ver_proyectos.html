@@ -44,18 +44,18 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <a href="/tareas/porProyecto/{{p.nombre}}"><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-clipboard-list"></i></button></a>
+                                <a href="/tareas/porProyecto/{{p.nombre}}"><button type="button" class="btn btn-outline-dark btn-xs"><i class="fa-solid fa-clipboard-list"></i></button></a>
                             </td>
                             <td>
-                                <a href="/tareas/historico/{{p.nombre}}"><button type="button" class="btn btn-dark btn-xs"><i class="fa-solid fa-file-lines"></i></button></a>
+                                <a href="/tareas/historico/{{p.nombre}}"><button type="button" class="btn btn-outline-dark btn-xs"><i class="fa-solid fa-file-lines"></i></button></a>
                             </td>
                             <td>
                                 {% if autorizado %}
-                                <button type="button" id="editarProyecto" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarProyectoModal" data-bs-whatever="{{p.nombre}}`{{p.descripcion}}`{{p.cliente}}`{{p.n_expediente}}" onclick="showEditarProyectoModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
-                                <a href="borrarProyecto/{{p.id}}" class="btn btn-dark btn-xs btnEliminacion"><i class="fa-solid fa-trash-can"></i></a>
+                                <button type="button" id="editarProyecto" class="btn btn-outline-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarProyectoModal" data-bs-whatever="{{p.nombre}}`{{p.descripcion}}`{{p.cliente}}`{{p.n_expediente}}" onclick="showEditarProyectoModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
+                                <a href="borrarProyecto/{{p.id}}" class="btn btn-outline-dark btn-xs btnEliminacion"><i class="fa-solid fa-trash-can"></i></a>
                                 {% else %}
-                                <button type="button" class="btn btn-dark btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
-                                <button type="button" class="btn btn-dark btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="button" class="btn btn-outline-dark btn-xs" disabled><i class="fa-solid fa-pencil sm"></i></button>
+                                <button type="button" class="btn btn-outline-dark btn-xs" disabled><i class="fa-solid fa-trash-can"></i></button>
                                 {% endif %}
                             </td>
                         </tr>
@@ -92,8 +92,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-dark">Guardar</a></button> 
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-dark">Guardar</a></button> 
                         </div>
                     </div>
                 </div>

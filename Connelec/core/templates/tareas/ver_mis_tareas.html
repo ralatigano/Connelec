@@ -54,11 +54,11 @@
                             <td>{{t.fecha_creacion}}</td>
                             <td>{{t.fecha_actualizacion}}</td>
                             <td>
-                                <a href="explorarTarea/{{t.nombre}}"><button type="button" class="btn btn-dark btn-xs" ><i class="fa-solid fa-eye"></i></button></a>
+                                <a href="explorarTarea/{{t.nombre}}"><button type="button" class="btn btn-outline-dark btn-xs" ><i class="fa-solid fa-eye"></i></button></a>
                             </td>                                
                             <td>
-                                <button type="button" id="editarTarea" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarTareaModal" data-bs-whatever="{{t.nombre}}`{{t.descrip}}`{{t.encargado}}`{{t.estado}}`{{t.fecha_entrega}}`{{t.proyecto}}`{{t.created_by}}`{{request.user}}" onclick="showEditarTareaModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
-                                <a href="borrarTarea/{{t.id}}"><button type="button" class="btn btn-dark btn-xs btnEliminacion" data-bs-whatever="{{t.encargado}}`{{request.user}}`{{t.created_by}}"><i class="fa-solid fa-trash-can"></i></button></a>
+                                <button type="button" id="editarTarea" class="btn btn-outline-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarTareaModal" data-bs-whatever="{{t.nombre}}`{{t.descrip}}`{{t.encargado}}`{{t.estado}}`{{t.fecha_entrega}}`{{t.proyecto}}`{{t.created_by}}`{{request.user}}" onclick="showEditarTareaModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
+                                <a href="borrarTarea/{{t.id}}"><button type="button" class="btn btn-outline-dark btn-xs btnEliminacion" data-bs-whatever="{{t.encargado}}`{{request.user}}`{{t.created_by}}"><i class="fa-solid fa-trash-can"></i></button></a>
                             </td>
                         </tr>
                     {% endfor %} 
@@ -116,8 +116,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-dark">Guardar cambios</a></button> 
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-dark">Guardar cambios</a></button> 
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,15 @@
+--- 6/6/2024 ---
+
+********** Commit LjBywRC9 - v1.0.0 *********
+
+General
+*Se agrega la posibilidad de cambiar el "tema" de la web entre claro y oscuro, modificando además todos los elementos
+pertinentes.
+*Se incorpora el número de versión a la página.
+
+login
+*Se modifica la estructura del template de login para aprovechar la herencia de plantillas.
+
 --- 31/5/2024 ---
 
 ********** Commit Y8zpR8Jj *********
