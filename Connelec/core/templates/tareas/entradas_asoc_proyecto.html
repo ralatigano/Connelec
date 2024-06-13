@@ -10,10 +10,19 @@
         {% block header %}
         <h1>Histórico proyecto: {{proyecto}}</h1>
         <h6>Número de expediente: {{n_expediente}}</h6>
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
-        {% if autorizado %}
-        <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/proyectos/verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            {% if autorizado %}
+            <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
 
         {% block content %}
@@ -100,7 +109,19 @@
         {% endblock %}
             
         {% block footer %}
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/proyectos/verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a>
+            {% if autorizado %}
+            <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
     </body>
 </html>

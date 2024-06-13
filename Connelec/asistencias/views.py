@@ -105,6 +105,12 @@ def ver_periodo(request):
 
 @login_required
 def marcar_asistencia(request):
+    desdeRegistros = False
+    desdeHoy = False
+    if 'verAsistencias' in request.META.get('HTTP_REFERER'):
+        desdeRegistros = True
+    if 'hoy' in request.META.get('HTTP_REFERER'):
+        desdeHoy = True
     if request.method == 'POST':
         try:
             usuario = request.POST['usuario']
@@ -146,6 +152,8 @@ def marcar_asistencia(request):
         'hora': hora,
         'ult_reg': ult_reg,
         'autorizado': autorizado,
+        'desdeRegistros': desdeRegistros,
+        'desdeHoy': desdeHoy,
     }
     return render(request, 'asistencias/marcar_asistencia.html', data)
 
@@ -268,6 +276,9 @@ def ver_reportes(request):
 
 @login_required
 def crear_reporte(request):
+    desdeReportes = False
+    if 'verReportes' in request.META.get('HTTP_REFERER'):
+        desdeReportes = True
     if request.method == 'POST':
         # if request.POST["usuario"] == request.user and request.POST['fecha'] <= date.today().strftime("%Y-%m-%d") and request.POST['hora'] <= datetime.now().time():
         try:
@@ -286,8 +297,8 @@ def crear_reporte(request):
         except Exception as e:
             messages.error(
                 request, 'Hubo un error al crear el reporte: ' + str(e) + '.')
+
         return redirect('verReportes')
-        # else:
     else:
         nombre_usuario = request.user
         usuario = User.objects.get(username=request.user).get_full_name()
@@ -299,7 +310,8 @@ def crear_reporte(request):
             'nombre_usuario': nombre_usuario,
             'fecha': fecha,
             'hora': hora,
-            'Proys': Proys
+            'Proys': Proys,
+            'desdeReportes': desdeReportes,
         }
         return render(request, 'asistencias/nuevo_reporte.html', data)
 

@@ -10,7 +10,17 @@
         {% block header %}
         <h1>Tareas</h1>
         <br>
-        <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/tareas">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú tareas">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        </div>
         {% endblock %}
 
         {% block content %}
@@ -137,7 +147,17 @@
         {% endblock %}
 
         {% block footer %}
-        <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/tareas">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú tareas">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        </div>
         {% endblock %}
     </body>
 </html>

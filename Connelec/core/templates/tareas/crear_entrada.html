@@ -44,12 +44,18 @@
                     <button type="submit" id="submit" class="btn btn-outline-dark">Crear entrada</button>
                 </form>
             </div>
-            <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
         {% endblock %}
-
+        
         {% block footer %}
-
+        <a href="/tareas/historico/{{proyecto}}">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Ver histórico {{proyecto}}">
+                Volver atras
+            </button>
+        </a>
         {% endblock %}
     </body>
 </html>

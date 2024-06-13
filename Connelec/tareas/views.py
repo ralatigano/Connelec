@@ -20,6 +20,8 @@ app_name = 'tareas'
 
 @login_required
 def tareas(request):
+    global desdeProyectos
+    desdeProyectos = False
     usuario = User.objects.get(username=request.user).get_full_name()
     img = User.objects.get(username=request.user).usuario.image.url
     data = {
@@ -48,9 +50,25 @@ def ver_tareas(request):
 
 @login_required
 def crear_tarea(request):
+    # banderas para saber desde que vista estoy llegando a crear la tarea
+    desdeVerTareas = False
+    desdeMisTareas = False
+    nombreProyecto = ''
+    desdeTareas = False
+    global desdeProyectos
+    if desdeProyectos:
+        nombreProyecto = request.META.get('HTTP_REFERER').split('/')[5]
+        nombreProyecto = nombreProyecto.replace('%20', ' ')
+    if 'verTareas' in request.META.get('HTTP_REFERER'):
+        desdeVerTareas = True
+    if 'MisTareas' in request.META.get('HTTP_REFERER'):
+        desdeMisTareas = True
+    if not desdeVerTareas and desdeMisTareas and desdeProyectos:
+        desdeTareas = True
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
     Proys = Proyectos.objects.all()
+    # creo la tarea
     if request.method == 'POST':
         try:
             Tareas.objects.create(
@@ -93,13 +111,27 @@ def crear_tarea(request):
         except Exception as e:
             messages.error(
                 request, 'Hubo un error al crear la tarea: ' + str(e) + '.')
-        return redirect('verTareas')
-    if request.user.is_authenticated:
-        data = {
-            'usuario': usuario,
-            'Usus': Usus,
-            'Proys': Proys
-        }
+        # ve adonde redirijo
+        if desdeProyectos:
+            desdeProyectos = False
+            tarea = Tareas.objects.last()
+            return redirect('porProyecto/' + tarea.proyecto.nombre)
+        elif desdeVerTareas:
+            return redirect('verTareas')
+        elif desdeMisTareas:
+            tarea = Tareas.objects.last()
+            return redirect('verMisTareas')
+        else:
+            return redirect('crearTarea')
+    data = {
+        'usuario': usuario,
+        'Usus': Usus,
+        'Proys': Proys,
+        'desdeProyectos': desdeProyectos,
+        'nombreProyecto': nombreProyecto,
+        'desdeVerTareas': desdeVerTareas,
+        'desdeMisTareas': desdeMisTareas,
+    }
     return render(request, 'tareas/crear_tarea.html', data)
 
 # Vista que se usa a traves de una petición AJAX desde el frontend para obtener la información de los usuarios y de los proyectos en formato JSON.
@@ -203,6 +235,8 @@ def ver_mis_tareas(request):
 
 @login_required
 def tareas_asosc_proy(request, proy):
+    global desdeProyectos
+    desdeProyectos = True
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
     p = Proyectos.objects.get(nombre=proy).id
@@ -211,6 +245,7 @@ def tareas_asosc_proy(request, proy):
         'usuario': usuario,
         'Usus': Usus,
         'Tars': Tars,
+        'proyecto': proy,
     }
     return render(request, 'tareas/tareas_asoc_proyecto.html', data)
 

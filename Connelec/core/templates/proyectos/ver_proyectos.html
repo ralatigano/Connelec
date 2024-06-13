@@ -10,9 +10,19 @@
         {% block header %}
         <h1>Proyectos</h1>
         <br>
-        <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> 
-        {% if autorizado %}
-        <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href=/proyectos>
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú proyectos">
+                    Volver atras
+                </button>
+            </a>
+            <!-- <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Menú proyectos</button></a>  -->
+            {% if autorizado %}
+            <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
+        </div>
         {% endif %}
         {% endblock %}
 
@@ -65,7 +75,7 @@
         </div>
         <!-- Modal Editar Proyecto -->
         <div class="modal fade" id="editarProyectoModal" tabindex="-1" aria-labelledby="editarProyectoModalLabel" data-bs-backdrop="static" aria-hidden="true">   
-            <form action="editarProyecto" method="POST">
+            <form id="form-modal" action="editarProyecto" method="POST">
                 {% csrf_token %}
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -98,17 +108,29 @@
                     </div>
                 </div>
             </form>
+            
         </div>
 
         <!-- Custom Js -->
         <script src="{% static 'proyectos/js/Proyectos.js' %}"></script>
+        
         {% endblock %}
 
         {% block footer %}
-        <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> 
-        {% if autorizado %}
-        <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <a href=/inicio><button type="button" class="btn btn-outline-dark">Menú principal</button></a> -->
+            <a href=/proyectos>
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú proyectos">
+                    Volver atras
+                </button>
+            </a> 
+            {% if autorizado %}
+            <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
     </body>
 </html>

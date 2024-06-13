@@ -20,7 +20,14 @@
             <a href="nuevoCliente"><button type="button" class="btn btn-outline-dark">Registrar nuevo cliente</button></a>
             {% endif %}
             <a href="verClientes"><button type="button" class="btn btn-outline-dark">Ver clientes</button></a>
-            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="/inicio">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menu principal">
+                    Volver atras
+                </button>
+            </a>
         </div>
         {% endblock %}
 

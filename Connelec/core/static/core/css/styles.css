@@ -1,13 +1,16 @@
-
+/* Estilos generales */
 .imagen-fondo{
-    background-size: 100% 100%;
+    /* background-size: 100% 100%; */
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    width: 100vw;
     z-index: -1;
 }
 
 .imagen-fondo-light{
+    opacity: 85%;
     background-image: url(/static/core/img/light/inicio-bg.jpeg);
 }
 .imagen-fondo-dark{
@@ -49,8 +52,9 @@
 
 
 .contenedor{
+    width: 100vw;
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns:  1fr;
     grid-template-rows: 10% 80% 10%;
     grid-template-areas:"Encabezado"
                         "ContenidoPrincipal"
@@ -62,24 +66,32 @@
 }
 
 .contenedor .Encabezado{
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(min(100%,15rem), 1fr)); */
     margin: 30px;
-    width: auto;
+    padding: 50px;
+    width: 100vw;
     height: 10%;
     grid-area: Encabezado;
     position: sticky;
 }
 
 .contenedor .ContenidoPrincipal{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%,15rem), 1fr));
     margin: 10px;
     padding: 50px;
-    width: 100%;
+    width: 100vw;
     height: 80%;
     grid-area: ContenidoPrincipal;
 }
 
 .contenedor .Pie{
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%,15rem), 1fr)); */
     margin: 30px;
-    width: 100%;
+    padding: 50px;
+    width: 100vw;
     height: 10%;
     grid-area: Pie;
     position: sticky;
@@ -92,11 +104,16 @@
     transform: translate(-50%, -5%);
 }
 
+.navbar{
+    z-index: 4;
+}
+
+/* Login */
 .recuadro-fondo-login{
     position: absolute;
-    top: 60%;
+    top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -60%);
     width: 400px;
     height: 300px;
     border-radius: 10px;
@@ -107,14 +124,26 @@
 
 .form-login{
     position: absolute;
-    top: 60%;
+    top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -60%);
     width: auto;
     z-index: 1000;
     background-color: transparent;
 }
 
+.form-restablecer-contrasena{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 1000;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .vacio{
     background-color: transparent;
     height: 100px;
@@ -124,7 +153,7 @@
     justify-content: center;
     z-index: 0;
 }
-
+/* header inicio */
 .img-perfil{
     border-radius: 50%;
     border: 2px solid #44515E;
@@ -134,7 +163,9 @@
     margin: 20px;
 }
 
+
 .saludo{
+    position: absolute;
     margin: 30px;
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -142,9 +173,9 @@
     text-align: left;
     align-items: center;
     background-color: transparent;
-    width: auto;
+    width: 100vw;
     z-index: 2;
-    float: left;
+    /* float: left; */
 }
 
 .botonera{
@@ -160,12 +191,17 @@
     z-index: 3;
 }
 
+
+.btn-group {
+    position: absolute;
+    gap: 10px;
+}
+
 .texto_navbar{
     display: flex;
     text-align: right;
     align-items: center;
     gap: 10px;
-    color: red;
 }
 
 .formulario{
@@ -196,6 +232,7 @@
 .modal-body{
     display: grid;
     text-align: left;
+    width: 100%;
     gap: 10px;
     z-index: 1000;
 }

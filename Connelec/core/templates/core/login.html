@@ -17,6 +17,8 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" id="submit" class="btn btn-outline-dark">Iniciar sesión</button>
+            <br>
+            <a href="/restablecerContrasena">Olvidé mi contraseña</a>
         </form>
         {% endblock %}
         

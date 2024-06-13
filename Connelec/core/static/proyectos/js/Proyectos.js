@@ -60,7 +60,7 @@ editarProyectoModal.addEventListener('show.bs.modal', async event => {
   $("#descripcion").val(descripcion);
   //$("#cliente").val(cliente);
   const valorNExpediente = n_expediente === 'None' ? 'Sin expediente' : n_expediente;
-  $("#n_expediente").val(valorNExpediente);
+  $("#n_expediente").val(valorNExpediente);            
   
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

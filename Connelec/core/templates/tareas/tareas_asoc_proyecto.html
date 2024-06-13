@@ -8,9 +8,21 @@
     </head>
     <body>
         {% block header %}
-        <h1>Tareas</h1>
+        <h1>Tareas del proyecto: {{proyecto}}</h1>
         <br>
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <a href=/inicio><button type="button" class="btn btn-outline-dark">Menú principal</button></a> -->
+            <!-- <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Menú proyectos</button></a> -->
+            <a href="/proyectos/verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a> 
+            <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        </div>
         {% endblock %}
 
         {% block content %}
@@ -119,7 +131,19 @@
         {% endblock %}
         
         {% block footer %}
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <a href=/inicio><button type="button" class="btn btn-outline-dark">Menú principal</button></a> -->
+            <!-- <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Menú proyectos</button></a> -->
+            <a href="/proyectos/verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a>
+            <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        </div>
         {% endblock %}
     </body>
 </html>

@@ -35,6 +35,8 @@ def proyectos(request):
 @login_required
 def ver_proyectos(request):
     autorizado = False
+    # menu_secundario = request.session['url_anterior'] = request.META.get(
+    #     'HTTP_REFERER')
     if request.user.groups.filter(name='Jefe Area').exists() or str(request.user) == 'superusuario':
         autorizado = True
     usuario = User.objects.get(username=request.user).get_full_name()
@@ -45,6 +47,7 @@ def ver_proyectos(request):
         'Usus': Usus,
         'Proys': Proys,
         'autorizado': autorizado,
+        # 'menu_secundario': menu_secundario,
     }
     return render(request, 'proyectos/ver_proyectos.html', data)
 
@@ -54,6 +57,9 @@ def ver_proyectos(request):
 
 @login_required
 def crear_proyecto(request):
+    desdeVerProyectos = False
+    if 'verProyectos' in request.META.get('HTTP_REFERER'):
+        desdeVerProyectos = True
     usuario = User.objects.get(username=request.user).get_full_name()
     Usus = User.objects.all()
     if request.method == 'POST':
@@ -73,7 +79,8 @@ def crear_proyecto(request):
         data = {
             'usuario': usuario,
             'Usus': Usus,
-            'Clies': Clies
+            'Clies': Clies,
+            'desdeVerProyectos': desdeVerProyectos,
         }
     return render(request, 'proyectos/crear_proyecto.html', data)
 

@@ -9,10 +9,19 @@
     <body>
         {% block header %}
         <h1>Lista de asistencias</h1>
-        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
-        {% if crear %}
-        <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/asistencias">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú asistencias">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            {% if crear %}
+            <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
         
         {% block content %}
@@ -104,10 +113,19 @@
         {% endblock %}
         
         {% block footer %}
-        <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
-        {% if crear %}
-        <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/asistencias">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú asistencias">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            {% if crear %}
+            <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
     </body>
 </html>

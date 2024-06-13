@@ -53,12 +53,29 @@
                     <button type="submit" id="submit" class="btn btn-outline-dark">Guardar reporte</button>
                 </form>
             </div>
-            <a href="/asistencias/verReportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
         {% endblock %}
-
+        
         {% block footer %}
-
+        {% if desdeReportes %}
+        <a href="/asistencias/verReportes">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Ver reportes">
+                Volver atras
+            </button>
+        </a>
+        {% else %}
+        <a href="/asistencias/reportes">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Menú reportes">
+                Volver atras
+            </button>
+        </a>
+        {% endif %}
         {% endblock %}
     </body>
 </html>

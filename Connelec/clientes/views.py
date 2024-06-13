@@ -52,6 +52,9 @@ def ver_clientes(request):
 
 @login_required
 def nuevo_cliente(request):
+    desdeVerClientes = False
+    if 'verClientes' in request.META.get('HTTP_REFERER'):
+        desdeVerClientes = True
     if request.method == 'POST':
         try:
             Cliente.objects.create(
@@ -88,7 +91,10 @@ def nuevo_cliente(request):
                 request, 'Hubo un error al crear el cliente: ' + str(e) + '.')
     else:
         usuario = User.objects.get(username=request.user).get_full_name()
-        data = {'usuario': usuario}
+        data = {
+            'usuario': usuario,
+            'desdeVerClientes': desdeVerClientes,
+        }
         return render(request, 'clientes/nuevo_cliente.html', data)
 
 # Vista para editar un cliente. Esta vista siempre viene de un POST porque los datos se editan en una ventana modal.

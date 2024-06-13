@@ -67,12 +67,39 @@
                 </div>
                 
                 <button type="submit" id="submit" class="btn btn-outline-dark">Guardar</button>
-                <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
             </form>
             
         </div>
         {% endblock %}
         {% block footer %}
+        {% if desdeRegistros %}
+        <a href="verAsistencias">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Ver registros">
+                Volver atras
+            </button>
+        </a>
+        {% elif desdeHoy %}
+        <a href="hoy">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Hoy">
+                Volver atras
+            </button>
+        </a>
+        {% else %}
+        <a href="/asistencias">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Menú asistencias">
+                Volver atras
+            </button>
+        </a>
+        {% endif %}
         
         {% endblock %}
     </body>

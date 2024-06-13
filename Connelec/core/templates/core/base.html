@@ -75,6 +75,13 @@
         </div>
       </div>
     </nav>
+    {% if messages %}
+    {% for message in messages %}
+      <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+    {% endif %}
   </head>
   <body>
     <div class="imagen-fondo imagen-fondo-light">
@@ -85,13 +92,6 @@
               <!--Aquí van los encabezados, si los hubiera, de cada plantilla-->
             {% endblock %}
           </div>
-            {% if messages %}
-              {% for message in messages %}
-                <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
         </header>
         <main>
           <div class="ContenidoPrincipal">
@@ -105,7 +105,7 @@
             {% block footer %}
               <!--Aquí va el pie del contenido de cada plantilla-->
             {% endblock %}
-            <div class="version"> Connelec v1.0.0 </div>
+            <div class="version"> Connelec v1.0.1 </div>
           </div>
         </footer>
       </div>
@@ -129,7 +129,7 @@
           document.querySelectorAll('.alert').forEach(function(message) {
               message.style.display = 'none';
           });
-      }, 5000); // 5000 milisegundos = 5 segundos
+      }, 7000); // 5000 milisegundos = 5 segundos
     </script>
   </body>
 </html>

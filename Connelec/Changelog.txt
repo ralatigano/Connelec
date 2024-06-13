@@ -1,3 +1,13 @@
+--- 7/6/2024 ---
+
+********** Commit ######## - v1.0.1 *********
+
+General
+*Se implementan variables de entorno para segurizar el proyecto.
+*Se modifican algunos estilos para lograr una funcionalidad correcta en la vista desde un dispositivo.
+*Se incorpora toda la funcionalidad relativa al olvido de contraseña por parte del usuario.
+*Se trabaja en el redireccionamiento de las distintas vistas de modo de mejorar la experiencia de usuario (Proyectos - Clientes)
+
 --- 6/6/2024 ---
 
 ********** Commit LjBywRC9 - v1.0.0 *********

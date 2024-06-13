@@ -23,7 +23,14 @@
             {% endif %}
             <a href="verAsistencias"><button type="button" class="btn btn-outline-dark">Ver registros</button></a>
             <a href="verPeriodo"><button type="button" class="btn btn-outline-dark">Ver periodo</button></a>
-            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="/inicio">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú principal">
+                    Volver atras
+                </button>
+            </a>
         </div>
         {% endblock %}
 

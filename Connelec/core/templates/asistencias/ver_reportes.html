@@ -10,10 +10,19 @@
         {% block header %}
         <h1>Lista de reportes</h1>
         <br>
-        <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
-        {% if crear %}
-        <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="reportes">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú reportes">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            {% if crear %}
+            <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
 
         {% block content %}
@@ -114,10 +123,19 @@
         {% endblock %}
 
         {% block footer %}
-        <a href="/asistencias/reportes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; 
-        {% if crear %}
-        <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="reportes">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú reportes">
+                    Volver atras
+                </button>
+            </a> &nbsp; 
+            {% if crear %}
+            <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+            {% endif %}
+        </div>
         {% endblock %}
     </body>
 </html>

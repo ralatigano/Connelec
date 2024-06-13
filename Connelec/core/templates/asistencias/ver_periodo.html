@@ -46,13 +46,19 @@
                 <br>   
 
                 <button type="submit" id="submit" class="btn btn-outline-dark">Calcular horas</button>
-                <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
             </form>
         </div>
         {% endblock %}
 
         {% block footer %}
-
+        <a href="/asistencias">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Menú asistencias">
+                Volver atras
+            </button>
+        </a>
         {% endblock %}
     </body>
 </html>
