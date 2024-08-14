@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     tareas, ver_tareas, crear_tarea,  info_editar_tarea, editar_tarea, borrar_tarea,
     ver_mis_tareas, tareas_asosc_proy, explorar_tarea,
-    entradas_asosc_proy, crear_entrada, editar_entrada, borrar_entrada
+    entradas_asosc_proy, crear_entrada, cargar_entradas, editar_entrada, borrar_entrada
 )
 
 urlpatterns = [
@@ -22,6 +22,7 @@ urlpatterns = [
     path('historico/<str:proy>', entradas_asosc_proy,
          name='entradasAsocProyecto'),
     path('crearEntrada/<str:proy>', crear_entrada, name='crearEntrada'),
+    path('cargarEntradas', cargar_entradas, name='cargarEntradas'),
     path('editarEntrada', editar_entrada, name='editarEntrada'),
     path('borrarEntrada/<int:id>', borrar_entrada, name='borrarEntrada'),
 ]

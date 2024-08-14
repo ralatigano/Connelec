@@ -5,11 +5,14 @@
 <html>
     <head>
         <title>{% block title %} Histórico {% endblock %}</title>
+        {% block head %}
+        <link rel="stylesheet" href="{% static 'proyectos/css/copiar_portapapeles.css' %}">
+        {% endblock %}
     </head>
     <body>
         {% block header %}
         <h1>Histórico proyecto: {{proyecto}}</h1>
-        <h6>Número de expediente: {{n_expediente}}</h6>
+        <h6>Número de expediente: {{n_expediente}} <button type="button" data-info="{{p.n_expediente}}" class="btn btn-outline-dark btn-xs" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Copiar al portapapeles" onclick="handleButtonClick(this)"><i class="fa-solid fa-copy"></i></button></h6>
         <div class="btn-group" role="group" aria-label="Basic example">
             <a href="/proyectos/verProyectos">
                 <button type="button" class="btn btn-outline-dark" 
@@ -21,6 +24,12 @@
             </a> &nbsp; 
             {% if autorizado %}
             <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+            <!-- <a href="/tareas/prueba"><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"> Prueba </button></a> -->
+            <form action="/tareas/cargarEntradas" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="excel_file">
+                <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-file-circle-plus"></i> Cargar desde excel </button>
+            </form>
             {% endif %}
         </div>
         {% endblock %}
@@ -71,6 +80,32 @@
             </table>
         </div>
 
+        <!-- Toast Elemento -->
+        <div id="toast" class="toast align-items-center border-0 d-none" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    ¡Copiado!
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Copiar Info al Portapapeles -->
+        <div class="modal fade" id="copiarInfoModal" tabindex="-1" aria-labelledby="copiarInfoLabel" data-bs-backdrop="static" aria-hidden="true">   
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="copiarInfoModal">¿Qué deseas copiar?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>   
+        </div>
         <!-- Modal Editar Entrada -->
         <div class="modal fade" id="editarEntradaModal" tabindex="-1" aria-labelledby="editarEntradaModalLabel" data-bs-backdrop="static" aria-hidden="true">   
             <form action="/tareas/editarEntrada" method="POST" enctype="multipart/form-data">
@@ -106,6 +141,7 @@
 
         <!-- Custom Js -->
         <script src="{% static 'tareas/js/Entradas.js' %}"></script>
+        <script src="{% static 'proyectos/js/copiar_portapapeles.js' %}"></script>
         {% endblock %}
             
         {% block footer %}
@@ -120,6 +156,11 @@
             </a>
             {% if autorizado %}
             <a href="/tareas/crearEntrada/{{proyecto}}"><button type="button" class="btn btn-outline-dark">Nueva entrada</button></a>
+            <form action="/tareas/cargarEntradas" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="excel_file">
+                <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-file-circle-plus"></i> Cargar desde excel </button>
+            </form>
             {% endif %}
         </div>
         {% endblock %}

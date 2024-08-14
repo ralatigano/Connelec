@@ -6,6 +6,9 @@ from datetime import datetime
 from django.http import JsonResponse
 from django.core import serializers
 from .functions import *
+from urllib.parse import urlparse
+import openpyxl
+from io import BytesIO
 from django.contrib.auth.decorators import login_required
 # cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
 from django.contrib.auth.models import User
@@ -357,3 +360,62 @@ def borrar_entrada(request, id):
         messages.error(
             request, "Hubo un error al borrar la entrada: " + str(e) + ".")
     return redirect('entradasAsocProyecto', proyecto)
+
+
+def cargar_entradas(request):
+    """
+    Carga entradas históricas de un proyecto desde un archivo Excel.
+
+    Parameters:
+    request (HttpRequest): La solicitud HTTP que contiene el archivo Excel.
+
+    Returns:
+    redirect: Redirecciona a la página de historico del proyecto.
+    """
+    total = 0
+    contador = 0
+    try:
+        if request.method == 'POST' and request.FILES.get('excel_file'):
+            # obtengo el nombre del proyecto desde la url
+            url_origen = request.META.get('HTTP_REFERER')
+            path = urlparse(url_origen).path
+            ultimo_elemento = path.split("/")[-1]
+            proyecto = ultimo_elemento.replace("%20", " ")
+            print(proyecto)
+            proy_id = Proyectos.objects.get(nombre=proyecto).id
+            excel_file = request.FILES['excel_file']
+            wb = openpyxl.load_workbook(excel_file)
+            sheet = wb.active
+
+            for row in sheet.iter_rows(values_only=True):
+                total += 1
+                if total == 1:
+                    continue
+
+                # Verificar si la fila está vacía
+                if all(cell is None or str(cell).strip() == "" for cell in row):
+                    break  # Detener el procesamiento si la fila está vacía
+
+                values = []
+                for col in range(1, 3):
+                    cell = sheet.cell(row=total, column=col)
+                    value = cell.value if cell.value is not None else " "
+                    values.append(str(value))
+                fecha, informacion = values
+                try:
+                    Entrada_historial.objects.create(
+                        fecha=fecha,
+                        usuario=User.objects.get(username=request.user),
+                        proyecto=Proyectos.objects.get(id=proy_id),
+                        resumen=informacion,
+                    )
+                    contador += 1
+                except Exception as e:
+                    messages.error(
+                        request, f"Sucedió un error inesperado. Error({e})")
+            messages.success(
+                request, f'Se han cargado {contador} de {total} entradas correctamente.')
+    except Exception as e:
+        messages.error(
+            request, f'No se han podido cargar las entradas. Error({e})')
+    return redirect('/tareas/historico/' + proyecto)

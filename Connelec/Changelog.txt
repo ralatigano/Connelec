@@ -1,6 +1,15 @@
+--- 14/8/2024 ---
+
+********** Commit fJgDSc6c - v1.0.2 *********
+General
+*Se corrige un problema que había en relación al tema claro y el funcionamiento de los modales.
+Proyectos
+*Se implementa la posibilidad de actualizar las entradas de los proyectos desde un archivo de excel.
+*Se implementan botones en la vista de proyectos, y entradas asociadas a los proyectos que permiten la copia de cierta información con solo hacer click.
+
 --- 7/6/2024 ---
 
-********** Commit ######## - v1.0.1 *********
+********** Commit ttLT3PjW - v1.0.1 *********
 
 General
 *Se implementan variables de entorno para segurizar el proyecto.

@@ -99,7 +99,7 @@ async function showEditarTareaModal(button){
     try{
         var response = await fetch(`/tareas/infoEditarTarea`);
         var data = await response.json();
-        
+        console.log(data);
         /*{{t.nombre}}`{{t.descrip}}`{{t.encargado}}`{{t.estado}}`{{t.fecha_entrega}}`{{t.proyecto}} */
         const recipient = button.getAttribute('data-bs-whatever')
         var partes = recipient.split('`');
