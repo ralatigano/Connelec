@@ -32,8 +32,10 @@
         {% endblock %}
         
         {% block footer %}
-        <a href="/perfil"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
-        <a href="/inicio"><button type="button" class="btn btn-outline-dark">Cancelar</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/perfil"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Cancelar</button></a>
+        </div>
         {% endblock %}
     </body>
 </html>

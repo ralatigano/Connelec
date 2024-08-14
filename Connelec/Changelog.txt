@@ -1,3 +1,77 @@
+--- 14/8/2024 ---
+
+********** Commit fJgDSc6c - v1.0.2 *********
+General
+*Se corrige un problema que había en relación al tema claro y el funcionamiento de los modales.
+Proyectos
+*Se implementa la posibilidad de actualizar las entradas de los proyectos desde un archivo de excel.
+*Se implementan botones en la vista de proyectos, y entradas asociadas a los proyectos que permiten la copia de cierta información con solo hacer click.
+
+--- 7/6/2024 ---
+
+********** Commit ttLT3PjW - v1.0.1 *********
+
+General
+*Se implementan variables de entorno para segurizar el proyecto.
+*Se modifican algunos estilos para lograr una funcionalidad correcta en la vista desde un dispositivo.
+*Se incorpora toda la funcionalidad relativa al olvido de contraseña por parte del usuario.
+*Se trabaja en el redireccionamiento de las distintas vistas de modo de mejorar la experiencia de usuario (Proyectos - Clientes)
+
+--- 6/6/2024 ---
+
+********** Commit LjBywRC9 - v1.0.0 *********
+
+General
+*Se agrega la posibilidad de cambiar el "tema" de la web entre claro y oscuro, modificando además todos los elementos
+pertinentes.
+*Se incorpora el número de versión a la página.
+
+login
+*Se modifica la estructura del template de login para aprovechar la herencia de plantillas.
+
+--- 31/5/2024 ---
+
+********** Commit Y8zpR8Jj *********
+
+General
+*Se corrigen algunos errores que se encuentran durante el desarrollo.
+*Se corrigen desperfectos en la base de datos que surgieron a partir de la modificación del modelo de usuario.
+*Se ordena mediante comentarios las urls del proyecto.
+*Se empieza a documentar algunas vistas.
+
+App: asistencias
+*Se agrega la funcionalidad de editar y borrar registros de asistencias considerando los permisos de cada usuario.
+*Se agrega la funcionalidad de editar y borrar reportes de tareas considerando los permisos de cada usuario.
+--Se decide implementar el criterio de que en general los usuarios pueden modificar aquellos registros que fueron creados
+por ellos, pero no los que fueron creados por otros usuarios.
+*En el afan de corregir un error que se descubrió durante el desarrollo se cambia el modelo de reporte de tareas.
+
+App: clientes
+*Se agrega la funcionalidad de editar y borrar registros de clientes considerando la nueva estructura de permisos.
+
+App: proyectos
+*Se agrega la funcionalidad de editar y borrar registros de proyectos considerando la nueva estructura de permisos.
+
+App: tareas
+*Se agrega la funcionalidad de editar y borrar registros de tareas considerando la nueva estructura de permisos.
+*Se agrega la funcionalidad de editar y borrar registros de entradas de historial considerando la nueva estructura de permisos.
+
+--- 28/5/2024 ---
+
+********** Commit v5tZ2Uh8 *********
+
+General views
+*Se incorporan cambios para garantizar que solo un usuario logueado pueda navegar en la app.
+
+App: asistencias
+*Se modifica el modelo de usuario que se había utilizado en un principio por otro que es una extensión del modelo nativo para
+recuperar funcionalidad en cuanto usuarios, grupos y premisos. Esto implica cambios en las demas aplicaciones para que se ajusten
+a la nueva estructura.
+
+App: tareas
+*Se registra correctamente el model de entrada_historial de modo que funcione correctamente en el panel de administración.
+*Se agrega la funcionalidad para poder editar y borrar entradas de los históricos de los proyectos.
+
 --- 23/5/2024 ---
 
 ********** Commit b8HNWcTQ *********

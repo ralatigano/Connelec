@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from proyectos.models import Proyectos
+from django.contrib.auth.models import User
 
 # Create your models here.
 opciones_estado = [
@@ -16,8 +17,11 @@ opciones_estado = [
 class Tareas(models.Model):
     nombre = models.CharField(max_length=100)
     descrip = models.TextField(max_length=500)
+    # cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
     encargado = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, blank=True, null=True)
+        User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    # encargado = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, blank=True, null=True)
     estado = models.CharField(
         max_length=30, choices=opciones_estado, default='Sin asignar')
     fecha_entrega = models.DateField(default=None, blank=True, null=True)
@@ -25,6 +29,8 @@ class Tareas(models.Model):
         "proyectos.Proyectos", on_delete=models.CASCADE, default=None, blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='created_models')
 
     def __str__(self):
         return self.nombre
@@ -36,8 +42,11 @@ class Tareas(models.Model):
 
 class Entrada_historial(models.Model):
     fecha = models.DateTimeField(null=True, blank=True, default=None)
+    # cambio esto para probar un modelo de usuario con una aplicación OneToOneField con User
     usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, blank=True, null=True)
+        User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    # usuario = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, blank=True, null=True)
     resumen = models.TextField(max_length=1000)
     proyecto = models.ForeignKey(
         "proyectos.Proyectos", on_delete=models.CASCADE)

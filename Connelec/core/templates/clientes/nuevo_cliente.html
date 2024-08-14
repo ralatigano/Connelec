@@ -73,12 +73,29 @@
                     <button type="submit" id="submit" class="btn btn-outline-dark">Crear cliente</button>
                 </form>
             </div>
-            <a href="/clientes"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
         {% endblock %}
-
+        
         {% block footer %}
-
+        {% if desdeVerClientes %}
+        <a href="verClientes">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Ver clientes">
+                Volver atras
+            </button>
+        </a>
+        {% else %}
+        <a href="/clientes">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Menú clientes">
+                Volver atras
+            </button>
+        </a>
+        {% endif %}
         {% endblock %}
     </body>
 </html>

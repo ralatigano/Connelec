@@ -16,12 +16,21 @@
         
         {% block content %}
         <div class="botonera">
+            <a href="reportes"><button type="button" class="btn btn-outline-dark">Reportes</button></a>
+            {% if crear %}
             <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
             <a href="hoy"><button type="button" class="btn btn-outline-dark">Hoy</button></a>
-            <a href="verPeriodo"><button type="button" class="btn btn-outline-dark">Ver periodo</button></a>
+            {% endif %}
             <a href="verAsistencias"><button type="button" class="btn btn-outline-dark">Ver registros</button></a>
-            <a href="reportes"><button type="button" class="btn btn-outline-dark">Reportes</button></a>
-            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="verPeriodo"><button type="button" class="btn btn-outline-dark">Ver periodo</button></a>
+            <a href="/inicio">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú principal">
+                    Volver atras
+                </button>
+            </a>
         </div>
         {% endblock %}
 

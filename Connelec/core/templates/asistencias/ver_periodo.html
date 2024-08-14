@@ -19,12 +19,16 @@
                 <div class="form-group usuario">
                     <label for="usuario" style="font-weight: bold">Nombre de usuario</label>
                     <br>
+                    {% if autorizado or request.user == superusuario %}
                     <select name="usuario" id="usuairo" class="form-control select">
                         <option value="{{username}}">{{username}}</option>
                         {% for u in Usus %}
-                            <option value="{{u.nombre}}">{{u.nombre}}</option>
+                            <option value="{{u.username}}">{{u.username}}</option>
                         {% endfor %}
                     </select>
+                    {% else %}
+                    <input type="text" id="usuairo" name="usuario" value="{{username}}" readonly>
+                    {% endif %}
                 </div>
 
                 <div class="form-group fecha">
@@ -42,13 +46,19 @@
                 <br>   
 
                 <button type="submit" id="submit" class="btn btn-outline-dark">Calcular horas</button>
-                <a href="/asistencias"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
             </form>
         </div>
         {% endblock %}
 
         {% block footer %}
-
+        <a href="/asistencias">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Menú asistencias">
+                Volver atras
+            </button>
+        </a>
         {% endblock %}
     </body>
 </html>

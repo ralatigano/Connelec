@@ -65,12 +65,50 @@
                     <button type="submit" id="submit" class="btn btn-outline-dark">Crear tarea</button>
                 </form>
             </div>
-            <a href="/tareas"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
         </div>
         {% endblock %}
 
         {% block footer %}
-
+        <div class="btn-group" role="group" aria-label="Basic example">
+            {% if desdeProyectos %}
+                <a href="porProyecto/{{nombreProyecto}}">
+                    <button type="button" class="btn btn-outline-dark" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="Tareas {{nombreProyecto}}">
+                        Volver atras
+                    </button>
+                </a>
+            {% elif desdeVerTareas %}
+                <a href="verTareas">
+                    <button type="button" class="btn btn-outline-dark" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="Ver tareas">
+                        Volver atras
+                    </button>
+                </a>
+            {% elif desdeMisTareas %}
+                <a href="verMisTareas">
+                    <button type="button" class="btn btn-outline-dark" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="Ver tareas {{nombreEncargado}}">
+                        Volver atras
+                    </button>
+                </a>
+            {% else %}
+                <a href="/tareas">
+                    <button type="button" class="btn btn-outline-dark" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="Menú tareas">
+                        Volver atras
+                    </button>
+                </a>
+            {% endif %}
+            <!-- <a href="/tareas"><button type="button" class="btn btn-outline-dark">Menú tareas</button></a> -->
+        </div>
         {% endblock %}
     </body>
 </html>

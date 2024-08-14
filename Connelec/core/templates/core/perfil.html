@@ -44,8 +44,10 @@
         {% endblock %}
 
         {% block footer %}
-        <a href="/cambiarContrasena"><button type="button" class="btn btn-outline-dark">Cambiar contraseña</button></a>
-        <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver al inicio</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/cambiarContrasena"><button type="button" class="btn btn-outline-dark">Cambiar contraseña</button></a>
+            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver al inicio</button></a>
+        </div>
         {% endblock %}
     </body>
 </html>

@@ -46,7 +46,15 @@ editarTareaModal.addEventListener('show.bs.modal', async event => {
   const estado = partes[3];
   const f_entrega = partes[4];
   const proyecto = partes[5];
-
+  const creador = partes[6];
+  const requestUser = partes[7];
+  // Comprueba si el usuario tiene permisos para editar el registro
+  if (creador !== requestUser && String(requestUser) !== 'superusuario' && encargado!== requestUser) {
+    // El usuario no tiene permisos para editar el registro
+    alert("No tienes permiso para editar este registro.");
+    event.preventDefault();
+    return;
+  }
   //cambio el texto del título del modal
   const modalTitle = editarTareaModal.querySelector('.modal-title')
   modalTitle.textContent = `Editar Tarea: ${nombre}`
@@ -63,13 +71,43 @@ editarTareaModal.addEventListener('show.bs.modal', async event => {
   
 });
 
+
+(function () {
+    const btnEliminacion = document.querySelectorAll(".btnEliminacion");
+    btnEliminacion.forEach(btn=>{
+        btn.addEventListener("click", (e)=>{
+            const recipient = btn.getAttribute('data-bs-whatever');
+            var partes = recipient.split('`');
+
+            const encargado = partes[0];
+            const requestUser = partes[1];
+            const creador = partes[2];
+            if (creador === requestUser || encargado === requestUser || String(requestUser) === 'superusuario') {
+                const confirmacion = confirm("¿Está segur@ de que desea eliminar este elemento?");
+                if(!confirmacion){
+                    e.preventDefault();
+                }
+            } else {
+                alert("No tienes permiso para eliminar este registro.");
+                e.preventDefault();
+            }   
+        });
+    });
+})();
+
 async function showEditarTareaModal(button){
     try{
         var response = await fetch(`/tareas/infoEditarTarea`);
         var data = await response.json();
+        console.log(data);
+        /*{{t.nombre}}`{{t.descrip}}`{{t.encargado}}`{{t.estado}}`{{t.fecha_entrega}}`{{t.proyecto}} */
+        const recipient = button.getAttribute('data-bs-whatever')
+        var partes = recipient.split('`');
+        const encargado = partes[2];
+        const proyecto = partes[5];        
         
         var cardContentUsus = `
-            <option value="Ninguno">Ninguno</option>
+            <option value="${encargado === 'None' ? 'Ninguno' : encargado}">${encargado === 'None' ? 'Ninguno' : encargado}</option>
             ${data.Usus.map(usu => `<option value="${usu.username}">${usu.username}</option>`).join('')}
         
         `;
@@ -77,7 +115,7 @@ async function showEditarTareaModal(button){
         modalBodyEncargado.innerHTML = cardContentUsus;
         
         var cardContentProys = `
-            <option value="Ninguno">Ninguno</option>
+            <option value="${proyecto === 'None' ? 'Ninguno' : proyecto}">${proyecto === 'None' ? 'Ninguno' : proyecto}</option>
             ${data.Proys.map(proy => `<option value="${proy.nombre}">${proy.nombre}</option>`).join('')}
         
         `;

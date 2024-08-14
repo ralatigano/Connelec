@@ -8,9 +8,21 @@
     </head>
     <body>
         {% block header %}
-        <h1>Tareas</h1>
+        <h1>Tareas del proyecto: {{proyecto}}</h1>
         <br>
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <a href=/inicio><button type="button" class="btn btn-outline-dark">Menú principal</button></a> -->
+            <!-- <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Menú proyectos</button></a> -->
+            <a href="/proyectos/verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a> 
+            <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        </div>
         {% endblock %}
 
         {% block content %}
@@ -26,11 +38,11 @@
                         <th class="centered">Proyecto</th>
                         <th class="centered">F. Creación</th>
                         <th class="centered">F. Actualización</th>
-                        <th class="centered">Editar</th>
                         <th class="centered">Explorar</th>
+                        <th class="centered">Editar/Borrar</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody_Clientes">
+                <tbody id="tableBody_TareasAsocProyecto">
                     {% for t in Tars %}
                         <tr>
                             <td>{{t.nombre}}</td>
@@ -42,11 +54,12 @@
                             <td>{{t.fecha_creacion}}</td>
                             <td>{{t.fecha_actualizacion}}</td>
                             <td>
-                                <button type="button" id="editarTarea" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarTareaModal" data-bs-whatever="{{t.nombre}}|{{c.descrip}}|{{t.encargado}}|{{t.estado}}|{{t.fecha_entrega}}|{{t.proyecto}}" onclick="showEditarTareaModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
-                            </td>
-                            <td>
-                                <a href="explorarTarea/{{t.nombre}}"><button type="button" class="btn btn-dark btn-xs" ><i class="fa-solid fa-eye"></i></button></a>
+                                <a href="explorarTarea/{{t.nombre}}"><button type="button" class="btn btn-outline-dark btn-xs" ><i class="fa-solid fa-eye"></i></button></a>
                             </td>                                
+                            <td>
+                                <button type="button" id="editarTarea" class="btn btn-outline-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editarTareaModal" data-bs-whatever="{{t.nombre}}`{{c.descrip}}`{{t.encargado}}`{{t.estado}}`{{t.fecha_entrega}}`{{t.proyecto}}`{{t.created_by}}`{{request.user}}" onclick="showEditarTareaModal(this)"><i class="fa-solid fa-pencil sm"></i></button>
+                                <a href="borrarTarea/{{t.id}}"><button type="button" class="btn btn-outline-dark btn-xs btnEliminacion" data-bs-whatever="{{t.encargado}}`{{request.user}}`{{t.created_by}}"><i class="fa-solid fa-trash-can"></i></button></a>
+                            </td>
                         </tr>
                     {% endfor %} 
 
@@ -105,8 +118,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</a></button> 
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-dark">Guardar cambios</a></button> 
                         </div>
                     </div>
                 </div>
@@ -118,7 +131,19 @@
         {% endblock %}
         
         {% block footer %}
-        <a href="/proyectos/verProyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a> &nbsp; <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <a href=/inicio><button type="button" class="btn btn-outline-dark">Menú principal</button></a> -->
+            <!-- <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Menú proyectos</button></a> -->
+            <a href="/proyectos/verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a>
+            <a href="/tareas/crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
+        </div>
         {% endblock %}
     </body>
 </html>

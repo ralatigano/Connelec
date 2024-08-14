@@ -19,7 +19,14 @@
             <a href="verTareas"><button type="button" class="btn btn-outline-dark">Ver tareas</button></a>
             <a href="verMisTareas"><button type="button" class="btn btn-outline-dark">Ver mis tareas</button></a>
             <a href="crearTarea"><button type="button" class="btn btn-outline-dark">Crear nueva tarea</button></a>
-            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            <a href="/inicio">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú principal">
+                    Volver atras
+                </button>
+            </a>
         </div>
         {% endblock %}
 

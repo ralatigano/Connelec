@@ -29,11 +29,12 @@ admin.site.register(Archivos)
 
 
 class Entrada_historialAdmin(admin.ModelAdmin):
-    list_display = ['fecha', 'resumen', 'tarea', 'adjunto', 'fecha_creacion']
-    list_filter = ['fecha', 'fecha_creacion']
+    list_display = ['fecha', 'resumen',
+                    'proyecto', 'adjunto', 'fecha_creacion']
+    list_filter = ['proyecto', 'fecha', 'fecha_creacion']
     search_fields = ['proyecto']
     list_per_page = 30
-    readonly_fields = ('fecha_creacion')
+    readonly_fields = ['fecha_creacion']
 
 
-admin.site.register(Entrada_historial)
+admin.site.register(Entrada_historial, Entrada_historialAdmin)

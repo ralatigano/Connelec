@@ -16,9 +16,18 @@
 
         {% block content %}
         <div class="botonera">
-            <a href="verProyectos"><button type="button" class="btn btn-outline-dark">Ver proyectos</button></a>
+            {% if crear %}
             <a href="crearProyecto"><button type="button" class="btn btn-outline-dark">Crear nuevo proyecto</button></a>
-            <a href="/inicio"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            {% endif %}
+            <a href="verProyectos"><button type="button" class="btn btn-outline-dark">Ver proyectos</button></a>
+            <a href="/inicio">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú principal">
+                    Volver atras
+                </button>
+            </a>
         </div>
         {% endblock %}
 

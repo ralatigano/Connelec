@@ -36,11 +36,33 @@
                     <button type="submit" id="submit" class="btn btn-outline-dark">Crear proyecto</button>
                 </form>
             </div>
-            <a href="/proyectos"><button type="button" class="btn btn-outline-dark">Volver atras</button></a>
+            
         </div>
         {% endblock %}
         
         {% block footer %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            {% if desdeVerProyectos %}
+            <a href="verProyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver proyectos">
+                    Volver atras
+                </button>
+            </a>
+            {% else %}
+            <a href="/proyectos">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Proyectos">
+                    Volver atras
+                </button>
+            </a>
+            {% endif %}
+            <!-- <a href=/inicio><button type="button" class="btn btn-outline-dark">Menú principal</button></a> -->
+        </div>
         {% endblock %}
     </body>
 </html>
