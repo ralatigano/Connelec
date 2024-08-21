@@ -2,7 +2,7 @@
 from django.urls import path
 from .views import (
     asistencia, hoy, ver_periodo,
-    marcar_asistencia, listar_registros, editar_registro, borrar_registro,
+    marcar_asistencia, listar_registros, editar_registro, borrar_registro, enviar_asistencia,
     reportes, crear_reporte, ver_reportes, editar_reporte, borrar_reporte
 )
 
@@ -14,6 +14,7 @@ urlpatterns = [
     path('verPeriodo', ver_periodo, name='verPeriodo'),
     # CRUD Registros
     path('verAsistencias', listar_registros, name='verAsistencias'),
+    path('enviar_asistencia', enviar_asistencia, name='enviarAsistencia'),
     path('marcarAsistencia', marcar_asistencia, name='marcarAsistencia'),
     path('editarRegistro', editar_registro, name='editarRegistro'),
     path('borrarRegistro/<int:id>', borrar_registro, name='borrarRegistro'),
