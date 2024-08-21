@@ -5,9 +5,11 @@ from datetime import datetime, date
 from .functions import *
 from proyectos.models import Proyectos
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 # cambio esto para probar un modelo de usuario con una opción OneToOneField con User
 from .models import registro, Reporte_tarea  # User,
 from django.contrib.auth.models import User, Group
+from django.http import JsonResponse
 
 app_name = 'asistencias'
 # Create your views here.
@@ -156,6 +158,41 @@ def marcar_asistencia(request):
         'desdeHoy': desdeHoy,
     }
     return render(request, 'asistencias/marcar_asistencia.html', data)
+
+
+@csrf_exempt
+def enviar_asistencia(request):
+    if request.method == 'POST':
+        try:
+            # Separar y procesar los datos recibidos
+
+            datos = request.POST['datos_a_enviar'].split('|')
+            nombre = datos[0].split(' ')[0]
+            print("nombre: ", nombre)
+            user = User.objects.get(first_name=nombre)
+            tipo = datos[1]
+            fecha_str = datos[2].split(' ', 1)[1]
+            fecha = datetime.strptime(
+                fecha_str, '%d/%m/%Y')
+            hora_str = datos[3]
+            hora = datetime.strptime(hora_str, '%H:%M').time()
+
+            # Crear el registro en la base de datos
+            registro.objects.create(
+                usuario=user,
+                fecha=fecha,
+                hora=hora,
+                tipo=tipo
+            )
+
+            # Responder con un JSON y un código 200
+            return JsonResponse({'status': 'success', 'message': 'Asistencia registrada con éxito.'}, status=200)
+        except Exception as e:
+            # Manejar errores y responder con un código 500
+            print(f"Error en enviar_asistencia: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Método no permitido.'}, status=405)
 
 # Vista para ver todos los registros de asistencias de todos los usuarios.
 # Se evalua los permisos del usuario que hace la solicitud para habilitar ciertas funciones

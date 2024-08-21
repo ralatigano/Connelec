@@ -1,3 +1,9 @@
+--- 21/8/2024 ---
+
+********** Commit - v1.0.3 *********
+Asistencias
+*Se agrega una vista que recibe peticiones enviadas por la controladora RFID de la oficina en pos de registrar los ingresos y egresos de los empleados.
+
 --- 14/8/2024 ---
 
 ********** Commit fJgDSc6c - v1.0.2 *********
