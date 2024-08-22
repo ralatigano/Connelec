@@ -1,0 +1,35 @@
+
+/* Estilo para toast oscuro */
+.toast-dark {
+    background-color: #343a40; /* Color de fondo oscuro */
+    color: #f8f9fa; /* Color de texto claro */
+}
+
+/* Estilo para toast claro */
+.toast-light {
+    background-color: #f8f9fa; /* Color de fondo claro */
+    color: #343a40; /* Color de texto oscuro */
+}
+
+/* Estilo para el cuerpo del toast para mejorar la legibilidad */
+.toast-body-dark, .toast-body-light {
+    width: auto;
+    max-width: 200px; /* Limitar el ancho del toast */
+    height: 50px;
+    padding: 10px; /* Relleno para el cuerpo del toast */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+}
+
+/* Toast básico */
+.toast {
+    position: fixed;
+    width: auto;
+    max-width: 200px; /* Limitar el ancho del toast */
+    height: 50px;
+    font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+    z-index: 9999;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
