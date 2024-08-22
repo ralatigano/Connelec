@@ -29,6 +29,17 @@ window.addEventListener("load", async() => {
     await initDataTable();
 });
 
+(function () {
+    const btnEliminacion = document.querySelectorAll(".btnEliminacion");
+    btnEliminacion.forEach(btn=>{
+        btn.addEventListener("click", (e)=>{
+            const confirmacion = confirm("¿Está segur@ de que desea eliminar este elemento?");
+            if(!confirmacion){
+                e.preventDefault();
+            }    
+        });
+    });
+})();
 
 const editarClienteModal = document.getElementById('editarClienteModal')
 editarClienteModal.addEventListener('show.bs.modal', event => {
