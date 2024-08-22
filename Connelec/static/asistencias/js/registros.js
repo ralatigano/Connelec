@@ -20,11 +20,105 @@ const initDataTable=async() => {
                 next: 'Siguiente',
                 previous: 'Anterior'
             }
-        }
+        },
+        columnDefs: [ { targets: 3, type: 'date' } ],
+        order: [[ 3, "desc" ]]
     });
     dataTableIsInitilized=true;
 }
 
 window.addEventListener("load", async() => {
     await initDataTable();
+});
+
+// (function () {
+//     const btnEliminacion = document.querySelectorAll(".btnEliminacion");
+//     btnEliminacion.forEach(btn=>{
+//         btn.addEventListener("click", (e)=>{
+//             const confirmacion = confirm("¿Está segur@ de que desea eliminar este elemento?");
+//             if(!confirmacion){
+//                 e.preventDefault();
+//             }    
+//         });
+//     });
+// })();
+
+(function () {
+    const btnEliminacion = document.querySelectorAll(".btnEliminacion");
+    btnEliminacion.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const recipient = btn.getAttribute('data-bs-whatever');
+            var partes = recipient.split('`');
+
+            const requestUser = partes[0];
+            const nombre = partes[1];
+            if (nombre === requestUser) {
+                const confirmacion = confirm("¿Está segur@ de que desea eliminar este elemento?");
+                if(!confirmacion){
+                    e.preventDefault();
+                }
+            } else {
+                alert("No tienes permiso para eliminar este registro.");
+                e.preventDefault();
+            }
+        });
+    });
+})();
+
+// function mostrarValores(request) {
+//     const recipient = document.querySelector('.btnEliminacion').getAttribute('data-bs-whatever');
+//     var partes = recipient.split('`');
+
+//     const requestUser = partes[0];
+//     const nombre = partes[1];
+
+//     const cartel = document.createElement('div');
+//     cartel.classList.add('alert', 'alert-info');
+//     cartel.textContent = `Dueño del registro: ${nombre}\nrequest.user.username: ${requestUser}`;
+
+//     document.body.appendChild(cartel);
+// }
+
+// mostrarValores();
+
+const editarRegistroModal = document.getElementById('editarRegistroModal')
+editarRegistroModal.addEventListener('show.bs.modal', async event => {
+  //botón que lanza el modal
+  const button = event.relatedTarget
+  //   {{r.id}}`{{r.nombre_completo}}`{{r.fecha}}`{{r.hora}}
+  
+  const recipient = button.getAttribute('data-bs-whatever')
+  //console.log(recipient);
+  var partes = recipient.split('`');
+
+  const id = partes[0];
+  const nombre = partes[1];
+  const fecha = partes[2];
+  const hora = partes[3];
+  const tipo = partes[4];
+  const requestUser = partes[5];
+  const usuario = partes[6];
+  
+// Comprueba si el usuario tiene permisos para editar el registro
+  if (usuario !== requestUser && String(requestUser) !== 'superusuario') {
+    // El usuario no tiene permisos para editar el registro
+    alert("No tienes permiso para editar este registro.");
+    event.preventDefault();
+    return;
+  }
+  
+  //Muestra el modal si el usuario tiene permisos
+  const modalTitle = editarRegistroModal.querySelector('.modal-title')
+  modalTitle.textContent = `Editar registro de: ${nombre}`
+
+  $("#id").val(id);
+  $("#fecha").val(fecha);
+  $("#hora").val(hora);
+  $("#tipo").val(tipo);
+  
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
+  
 });
