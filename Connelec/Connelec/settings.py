@@ -135,7 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # AUTH_USER_MODEL = 'asistencias.User'
 
 LOGIN_URL = reverse_lazy('login')

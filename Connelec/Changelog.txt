@@ -1,3 +1,17 @@
+--- 29/8/2024 ---
+
+********** Commit - v1.0.4 **********
+Asistencias
+*Se modifica el modelo de usuario de modo que genere una imagen de perfil con un fondo de color aleatorio a partir de una imagen default.png al momento de crearse un usuario.
+*Se incorpora una funcionalidad que permite a un usuario autorizado a descargar los registros de asistencia de la base de datos. Se puede descargar todos los registross o los que estén
+en un rango de fechas indicados.
+*Se incorpora un CRUD completo para el registro de ausencias justificadas así como el modelo para instanciar las mismas.
+*Se estructura de manera mas eficiente el código de la aplicación asistencias.
+*Momentáneamente se remueve las funcionalidades del cálculo de horas trabajadas en el día o en un rango de días.
+Reportes
+*Se incorpora una funcionalidad que permite a un usuario autorizado a descargar los reportes de tarea de la base de datos. Se puede descargar todos los reportes o los que estén
+en un rango de fechas indicados.
+
 --- 21/8/2024 ---
 
 ********** Commit - v1.0.3 *********

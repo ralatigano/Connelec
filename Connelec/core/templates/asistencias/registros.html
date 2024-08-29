@@ -17,9 +17,22 @@
                         data-bs-title="Menú asistencias">
                     Volver atras
                 </button>
-            </a> &nbsp; 
+            </a>
+            <a href="/asistencias/verAusencias">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú ausencias">
+                    Menú ausencias
+                </button>
+            </a>
             {% if crear %}
             <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+            {% endif %}
+            {% if autorizado %}
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#descargarAsistenciasModal">
+                Descargar asistencias
+            </button>
             {% endif %}
         </div>
         {% endblock %}
@@ -65,6 +78,36 @@
                 </table>
             </div>
         </div>
+
+        <!-- Modal descargar registros -->
+        <div class="modal fade" id="descargarAsistenciasModal" tabindex="-1" aria-labelledby="descargarAsistenciasModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="descargarAsistenciasModalLabel">Descargar Asistencias</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-check form-switch">
+                    <!-- <label class="form-check-label" for="descargarTodo">Descargar todos los registros</label> -->
+                    <input class="form-check-input" type="checkbox" id="descargarTodo" onchange="toggleFechaInputs()" data-bs-toggle="tooltip" data-bs-placement="top" title="Utiliza el interruptor para indicar si quieres descargar todos los registros o filtrarlos por fecha">
+                    <span class="form-check-label ms-2" id="toggleLabel">Descargar todos los registros</span>
+                  </div>
+                  <div id="fechaInputs" style="display:none;">
+                    <label for="fecha1" class="mt-3">Fecha inicial:</label>
+                    <input type="date" class="form-control" id="fecha1" name="fecha1" max="{{ hoy }}" required>
+                    
+                    <label for="fecha2" class="mt-3">Fecha final:</label>
+                    <input type="date" class="form-control" id="fecha2" name="fecha2" max="{{ hoy }}" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-outline-dark" onclick="descargarAsistencias()">Descargar</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
         <!-- Modal Editar Registro -->
         <div class="modal fade" id="editarRegistroModal" tabindex="-1" aria-labelledby="editarRegistroModalLabel" data-bs-backdrop="static" aria-hidden="true">   
@@ -114,16 +157,29 @@
         
         {% block footer %}
         <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="/asistencias">
+            <a href="/asistencias/ausencias">
                 <button type="button" class="btn btn-outline-dark" 
                         data-bs-toggle="tooltip" data-bs-placement="top"
                         data-bs-custom-class="custom-tooltip"
-                        data-bs-title="Menú asistencias">
+                        data-bs-title="Menú ausencias">
                     Volver atras
                 </button>
             </a> &nbsp; 
+            <a href="/asistencias/verAusencias">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Menú ausencias">
+                    Menú ausencias
+                </button>
+            </a>
             {% if crear %}
             <a href="marcarAsistencia"><button type="button" class="btn btn-outline-dark">Marcar asistencia</button></a>
+            {% endif %}
+            {% if autorizado %}
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#descargarAsistenciasModal">
+                Descargar asistencias
+            </button>
             {% endif %}
         </div>
         {% endblock %}

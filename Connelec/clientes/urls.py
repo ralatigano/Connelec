@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import clientes, ver_clientes, nuevo_cliente, editar_cliente, borrar_cliente
+from .views import (
+    clientes, ver_clientes, nuevo_cliente, editar_cliente, borrar_cliente
+)
 
 urlpatterns = [
     # Menu clientes

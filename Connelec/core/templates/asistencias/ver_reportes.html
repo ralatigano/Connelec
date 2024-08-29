@@ -22,6 +22,11 @@
             {% if crear %}
             <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
             {% endif %}
+            {% if autorizado %}
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#descargarReportesModal">
+                Descargar reportes
+            </button>
+            {% endif %}
         </div>
         {% endblock %}
 
@@ -75,6 +80,35 @@
             </div>
         </div>
         
+        <!-- Modal descargar registros -->
+        <div class="modal fade" id="descargarReportesModal" tabindex="-1" aria-labelledby="descargarReportesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="descargarReportesModalLabel">Descargar Reportes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="descargarTodo" onchange="toggleFechaInputs()" data-bs-toggle="tooltip" data-bs-placement="top" title="Utiliza el interruptor para indicar si quieres descargar todos los reportes o filtrarlos por fecha">
+                            <span class="form-check-label ms-2" id="toggleLabel">Descargar todos los reportes</span>
+                        </div>
+                        <div id="fechaInputs" style="display:none;">
+                            <label for="fecha1" class="mt-3">Fecha inicial:</label>
+                            <input type="date" class="form-control" id="fecha1" name="fecha1" max="{{ hoy }}" required>
+                            
+                            <label for="fecha2" class="mt-3">Fecha final:</label>
+                            <input type="date" class="form-control" id="fecha2" name="fecha2" max="{{ hoy }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-outline-dark" onclick="descargarReportes()">Descargar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal Editar Reporte -->
         <div class="modal fade" id="editarReporteModal" tabindex="-1" aria-labelledby="editarReporteModalLabel" data-bs-backdrop="static" aria-hidden="true">   
             <form action="editarReporte" method="POST">
@@ -134,6 +168,11 @@
             </a> &nbsp; 
             {% if crear %}
             <a href="crearReporte"><button type="button" class="btn btn-outline-dark">Nuevo reporte</button></a>
+            {% endif %}
+            {% if autorizado %}
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#descargarReportesModal">
+                Descargar reportes
+            </button>
             {% endif %}
         </div>
         {% endblock %}

@@ -122,3 +122,51 @@ editarRegistroModal.addEventListener('show.bs.modal', async event => {
   });
   
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+toggleFechaInputs(); // Llama a la función cuando se carga la página para configurar el texto correctamente
+});
+
+function toggleFechaInputs() {
+    const toggle = document.getElementById('descargarTodo').checked;
+    document.getElementById('fechaInputs').style.display = toggle ? 'block' : 'none';
+    document.getElementById('toggleLabel').innerText = toggle ? 'Descargar registros entre fechas' : 'Descargar todos los registros';
+}
+
+function descargarAsistencias() {
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const todos = document.getElementById('descargarTodo').checked ? 'false' : 'true';
+    const fecha1 = document.getElementById('fecha1').value;
+    const fecha2 = document.getElementById('fecha2').value;
+
+    if (todos && (!fecha1 || !fecha2 || fecha1 > fecha2)) {
+        alert('Por favor, selecciona fechas válidas.');
+        return;
+    }
+
+    const form = new FormData();
+    form.append('todos', todos);
+    if (todos) {
+        form.append('fecha1', fecha1);
+        form.append('fecha2', fecha2);
+    }
+
+    fetch('exportarRegistros', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrftoken
+        },
+        body: form
+    }).then(response => response.blob())
+        .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `registros_${new Date().toISOString().slice(0,10)}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        }).catch(error => console.error('Error:', error));
+}

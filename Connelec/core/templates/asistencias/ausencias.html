@@ -1,0 +1,138 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} Registro ausencias {% endblock %}</title>
+    </head>
+    <body>
+
+        {% block header %}
+        <h1>Ausencias justificadas</h1>
+        <br>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/asistencias/verAsistencias">
+                <button type="button" class="btn btn-outline-dark" 
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Ver asistencias">
+                    Volver atras
+                </button>
+            </a>
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ausenciaModal" data-bs-whatever="new|||{{autorizado}}">Registrar nueva ausencia</button>
+        </div>
+        {% endblock %}
+
+        {% block content %}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <table id="Ausencias" class="table table-hover table table-striped">
+                <thead>
+                    <tr>
+                        <th class="centered">Nombre</th>
+                        <th class="centered">Cant. de días</th>
+                        <th class="centered">Fecha de inicio</th>
+                        <th class="centered">Fecha de regreso</th>
+                        <th class="centered">Motivo</th>
+                        <th class="centered">Archivo</th>
+                        <th class="centered">Editar/Borrar</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody_Ausencias">
+                    {% for a in Aus %}
+                        <tr>
+                            <td>{{a.usuario.first_name}} {{a.usuario.last_name}}</td>
+                            <td>{{a.cantidad_dias}}</td>
+                            <td>{{a.fecha_inicio}}</td>
+                            <td>{{a.fecha_fin}}</td>
+                            <td>{{a.motivo}}</td>
+                            <td>
+                                {% if a.archivo %}
+                                <a href="{{a.archivo.url}}?{{ ausencia.updated_at.timestamp }}" download><button type="button" class="btn btn-outline-dark btn-xs"><i class="fa-solid fa-download"></i></button></a>
+                                {% else %}
+                                <p>Sin archivo</p>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ausenciaModal" data-bs-whatever="{{a.id}}|{{a.usuario}}|{{request.user}}|{{autorizado}}"><i class="fa-solid fa-pencil sm"></i></button>
+                                <a href="borrarAusencia/{{a.id}}" class="btn btn-outline-dark btn-xs btnEliminacion" data-bs-whatever="{{a.usuario}}|{{request.user}}|{{autorizado}}"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal para crear/editar ausencias -->
+        <div class="modal fade" id="ausenciaModal" tabindex="-1" aria-labelledby="ausenciaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="ausenciaForm" method="post" action="/asistencias/guardarAusencia" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ausenciaModalLabel"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="ausencia-id" name="id" value="0">
+                            <div class="mb-3">
+                                <label for="usuarioSelect" class="form-label">Usuario</label>
+                                <select class="form-select" id="usuarioSelect" name="usuarioSelect">
+                                    <!-- Opciones de usuarios aquí -->
+                                </select>
+                                <input type="text" id="usuarioInput" name="usuarioInput" class="form-control" style="display: none;" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha_fin" class="form-label">Fecha Fin</label>
+                                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cantidad_dias" class="form-label">Cantidad de Días</label>
+                                <input type="number" class="form-control" id="cantidad_dias" name="cantidad_dias">
+                            </div>
+                            <div class="mb-3">
+                                <label for="motivo" class="form-label">Motivo</label>
+                                <textarea rows="4" cols="50" class="form-control" id="motivo" name="motivo"></textarea>
+                            </div>
+
+                            <!-- Contenedor para el archivo actual -->
+                            <div id="archivo_actual"></div>
+                            <!-- Input para cargar archivos -->
+                            <div class="mb-3">
+                                <label for="archivo" name="label_archivo" class="form-label">Subir archivo</label>
+                                <input type="file" class="form-control" id="archivo" name="archivo">
+                                <div id="archivos_cargados" class="mt-2"></div>
+                            </div>
+
+                            <!-- Select múltiple oculto para almacenar los archivos eliminados -->
+                            <select id="archivos_eliminados" name="archivos_eliminados[]" multiple hidden>
+                            </select>                    
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-outline-dark">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'asistencias/js/ausencias.js' %}"></script>
+        {% endblock %}
+        {% block footer %}
+        <a href="/asistencias/verAsistencias">
+            <button type="button" class="btn btn-outline-dark" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Ver asistencias">
+                Volver atras
+            </button>
+        </a>
+        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ausenciaModal" data-bs-whatever="new">Registrar nueva ausencia</button>
+        {% endblock %}
+    </body>
+</html>
